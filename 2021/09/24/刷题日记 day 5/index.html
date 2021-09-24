@@ -22,7 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>所有标签 - zsk&#39;s personal blog</title>
+  <title>刷题日记 day-5 - zsk&#39;s personal blog</title>
+  
+    <meta name="keywords" content="刷题心得">
   
 
   
@@ -473,7 +475,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper tag search' style="display: none;">
+        <div id="full" class='cover-wrapper post search' style="display: none;">
           
             <div class='cover-bg lazyload placeholder' data-bg="https://static01.imgkr.com/temp/5a3186b4483b490eac34f6b6f0c5e3cb.jpg"></div>
           
@@ -535,23 +537,330 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper" id="pjax-container">
           
 
-
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
+
+
+  
+  <div class="article-meta" id="top">
     
-      <div class='post-wrapper'>
-        <article id="tag" class="post article white-box reveal shadow">
-          <h2>所有标签</h2>
-          <div class="all-tags">
-            
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/" rel="tag">刷题心得</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">2</span></li></ul>
-          </div>
-          <br>
+    
+    
+      <h1 class="title">
+        刷题日记 day-5
+      </h1>
+      <div class='new-meta-box'>
+        
           
-        </article>
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="">
+    <p>zsk</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/LeetCode/">LeetCode</a>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年9月24日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="刷题日记 day-5" data-path="/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%205/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
       </div>
     
+  </div>
+
+
   
+  
+  <h2 id="初探贪心算法"><a href="#初探贪心算法" class="headerlink" title="初探贪心算法"></a>初探贪心算法</h2><p>​        终于结束了回溯，老实说回溯是真的有点难，虽然有模板，但是很多问题的解决方式不尽相同。刷了也有20道题差不多，但是真正有印象的就几题。不过现在学到贪心了，我有点难受。它没有模板，就一个局部最优的算法思想。但是解决问题想到了这个思想，真的非常简单。想不到就呵呵了。</p>
+<h2 id="两个题目"><a href="#两个题目" class="headerlink" title="两个题目"></a>两个题目</h2><h3 id="下面是我今天被贪心折磨的日常："><a href="#下面是我今天被贪心折磨的日常：" class="headerlink" title="下面是我今天被贪心折磨的日常："></a>下面是我今天被贪心折磨的日常：</h3><h4 id="LeetCode第53题-最大子序和"><a href="#LeetCode第53题-最大子序和" class="headerlink" title="LeetCode第53题 最大子序和"></a>LeetCode第53题 <em><strong>最大子序和</strong></em></h4><p>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<p>示例 1：</p>
+<p>输入：nums = [-2,1,-3,4,-1,2,1,-5,4]<br>输出：6<br>解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。</p>
+<p>示例 2：</p>
+<p>输入：nums = [1]<br>输出：1</p>
+<p>示例 3：</p>
+<p>输入：nums = [0]<br>输出：0</p>
+<p>示例 4：</p>
+<p>输入：nums = [-1]<br>输出：-1</p>
+<p>示例 5：</p>
+<p>输入：nums = [-100000]<br>输出：-100000</p>
+<p>提示：</p>
+<p>1 &lt;= nums.length &lt;= 3 * 104<br>-105 &lt;= nums[i] &lt;= 105</p>
+<p>暴力解法</p>
+<pre><code class="java">class Solution &#123;
+    public int maxSubArray(int[] nums) &#123;
+        int maxValue=Integer.MIN_VALUE;
+        
+        for(int i=0;i&lt;nums.length;i++)&#123;
+            int count=0;
+            for(int j=i;j&lt;nums.length;j++)&#123;
+                count+=nums[j];
+                maxValue=count&gt;maxValue?count:maxValue;
+            &#125;
+        &#125;
+        return maxValue;
+    &#125;
+&#125;
+</code></pre>
+<p>时间复杂度是：O(n^2)</p>
+<p>但是如果用贪心算法来写：</p>
+<pre><code class="java">class Solution &#123;
+    public int maxSubArray(int[] nums) &#123;
+         int maxValue=Integer.MIN_VALUE;
+        int count=0;
+        for(int i=0;i&lt;nums.length;i++)&#123;
+            count+=nums[i];
+            if(count&gt;maxValue)
+                maxValue=count;
+            if(count&lt;0)
+                count=0;
+        &#125;
+        return maxValue;
+    &#125;
+&#125;
+</code></pre>
+<p>这个算法的时间复杂度很明显是O(n),初看还不是很明白，其实就是用了一个小技巧：我们都知道如果count后面加的是一个负数，就一定会让和变小，所以我们一旦碰到让count小于0的数据，就直接将count初始化为0，在从头开始记录count。这样看起来就使每一步都使得count是最大的，因为让count变成负数的元素我不会加入。这就是贪心的体现，但是这个很难想到呀！所以说贪心没有模板、只有一次次的踩坑积累经验，才可能想到有时候可以使用贪心。</p>
+<h4 id="LeetCode第55题-跳跃游戏"><a href="#LeetCode第55题-跳跃游戏" class="headerlink" title="LeetCode第55题 跳跃游戏"></a>LeetCode第55题 <em><strong>跳跃游戏</strong></em></h4><p>给定一个非负整数数组 nums ，你最初位于数组的 第一个下标 。数组中的每个元素代表你在该位置可以跳跃的最大长度。判断你是否能够到达最后一个下标。</p>
+<p>示例 1：</p>
+<p>输入：nums = [2,3,1,1,4]<br>输出：true<br>解释：可以先跳 1 步，从下标 0 到达下标 1, 然后再从下标 1 跳 3 步到达最后一个下标。<br>示例 2：</p>
+<p>输入：nums = [3,2,1,0,4]<br>输出：false<br>解释：无论怎样，总会到达下标为 3 的位置。但该下标的最大跳跃长度是 0 ， 所以永远不可能到达最后一个下标。</p>
+<p>提示：</p>
+<p>1 &lt;= nums.length &lt;= 3 * 104<br>0 &lt;= nums[i] &lt;= 105</p>
+<p>这个题目就有点符合现实了，有点像跳台阶，其实可以从后往前跳，判断前一个节点是否能到达最后一个节点，如果可以就更新当前节点为最后一个节点。这是一种思路。但是贪心法更赖皮：</p>
+<pre><code class="java">class Solution &#123;
+    public boolean canJump(int[] nums) &#123;
+        int cover=0;
+        if(nums.length==1)
+            return true;
+        for(int i=0;i&lt;=cover;i++)&#123;
+            cover=Math.max(i+nums[i],cover);
+            if(cover&gt;=nums.length-1)
+                return true;
+        &#125;
+        return false;
+    &#125;
+&#125;
+</code></pre>
+<p>看完也是不明所以，看了题解后感慨十分赖皮！其实就是看一个覆盖范围。你当前能走的步数的最大值是否覆盖到了最后一个元素，如果是肯定能走到。每次更新最大覆盖范围，这也是贪心法。</p>
+<h2 id="分析与小结"><a href="#分析与小结" class="headerlink" title="分析与小结"></a>分析与小结</h2><p>做贪心的题目就感觉手上有本秘籍，很厉害。但是就是不会用，但是当你以为它就是废物时，丢掉了，别人捡起来，看了秘籍后成了你梦想成为的人。唉。任重而道远！</p>
+
+  
+  
+    
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%205/>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%205/</a></p>
+              
+            
+          </blockquote>
+        </div>
+      
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-09-24T16:29:14+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年9月24日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>刷题心得</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%205/&title=刷题日记 day-5 - zsk's personal blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%205/&title=刷题日记 day-5 - zsk's personal blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%205/&title=刷题日记 day-5 - zsk's personal blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+        
+          
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/LeetCode/">LeetCode</a>
+    </a>
+  </div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：1k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：4分钟</p>
+    </a>
+  </div>
+
+
+        
+      
+    </div>
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%2010/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>刷题日记 day-10</p>
+          <p class='content'>写在前面​        李奶奶的动态规划！！！真的觉得自己智商过低，不适合刷动态规划。于是我找了一个稍微简单一点的链表问题，题目来自于：**LeetCode 143. 重排链表**，这个题目的...</p>
+        </a>
+      
+      
+        <a class='next' href='/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%206/'>
+          <p class='title'>刷题日记 day-6<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>写在前面这两天被贪心折磨，贪心真的很难想到，初看题目有点看不懂，好不容易推演了两个测试，明白了题目的用意，但还是无从下手。一看题解代码和分析，就感觉自己是个傻zi。
+
+今天写了两个贪心的题目，7...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+  </article>
+
+
+
+
+
+
 </div>
 <aside class='l_side'>
   
@@ -561,11 +870,26 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
 
+  <section class="widget toc-wrapper floatable desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E6%8E%A2%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95"><span class="toc-text">初探贪心算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%A4%E4%B8%AA%E9%A2%98%E7%9B%AE"><span class="toc-text">两个题目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E9%9D%A2%E6%98%AF%E6%88%91%E4%BB%8A%E5%A4%A9%E8%A2%AB%E8%B4%AA%E5%BF%83%E6%8A%98%E7%A3%A8%E7%9A%84%E6%97%A5%E5%B8%B8%EF%BC%9A"><span class="toc-text">下面是我今天被贪心折磨的日常：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LeetCode%E7%AC%AC53%E9%A2%98-%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C"><span class="toc-text">LeetCode第53题 最大子序和</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LeetCode%E7%AC%AC55%E9%A2%98-%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F"><span class="toc-text">LeetCode第55题 跳跃游戏</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E4%B8%8E%E5%B0%8F%E7%BB%93"><span class="toc-text">分析与小结</span></a></li></ol>
+    </div>
+  </section>
+
 
   
 
 
 </aside>
+
 
 
 		  
@@ -574,8 +898,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="刷题日记 day-5";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要

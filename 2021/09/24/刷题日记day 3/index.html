@@ -22,7 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>所有标签 - zsk&#39;s personal blog</title>
+  <title>刷题日记 day-3 - zsk&#39;s personal blog</title>
+  
+    <meta name="keywords" content="刷题心得">
   
 
   
@@ -473,7 +475,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper tag search' style="display: none;">
+        <div id="full" class='cover-wrapper post search' style="display: none;">
           
             <div class='cover-bg lazyload placeholder' data-bg="https://static01.imgkr.com/temp/5a3186b4483b490eac34f6b6f0c5e3cb.jpg"></div>
           
@@ -535,23 +537,297 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper" id="pjax-container">
           
 
-
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
+
+
+  
+  <div class="article-meta" id="top">
     
-      <div class='post-wrapper'>
-        <article id="tag" class="post article white-box reveal shadow">
-          <h2>所有标签</h2>
-          <div class="all-tags">
-            
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/" rel="tag">刷题心得</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">2</span></li></ul>
-          </div>
-          <br>
+    
+    
+      <h1 class="title">
+        刷题日记 day-3
+      </h1>
+      <div class='new-meta-box'>
+        
           
-        </article>
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="">
+    <p>zsk</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/LeetCode/">LeetCode</a>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年9月24日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="刷题日记 day-3" data-path="/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%203/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
       </div>
     
+  </div>
+
+
   
+  
+  <h2 id="题目概述"><a href="#题目概述" class="headerlink" title="题目概述"></a>题目概述</h2><p>LeetCode第46题：<em>全排列</em></p>
+<p>给定一个不含重复数字的数组 nums ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案。</p>
+<p>示例 1：</p>
+<p>输入：nums = [1,2,3]<br>输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]<br>示例 2：</p>
+<p>输入：nums = [0,1]<br>输出：[[0,1],[1,0]]<br>示例 3：</p>
+<p>输入：nums = [1]<br>输出：[[1]]</p>
+<p>提示：</p>
+<p>1 &lt;= nums.length &lt;= 6<br>-10 &lt;= nums[i] &lt;= 10<br>nums 中的所有整数 互不相同</p>
+<h2 id="解决代码"><a href="#解决代码" class="headerlink" title="解决代码"></a>解决代码</h2><pre><code class="java">class Solution &#123;
+    List&lt;List&lt;Integer&gt;&gt; res=new ArrayList&lt;&gt;();//存放正确结果的集合
+    List&lt;Integer&gt; path=new ArrayList&lt;&gt;();//存放单个正确的结果
+    public List&lt;List&lt;Integer&gt;&gt; permute(int[] nums) &#123;
+        boolean[] used=new boolean[nums.length];//需要一个数组来判断集合的元素是否重复使用
+        backtracking(nums,used);
+        return res;
+    &#125;
+    //子集问题和排列问题最大的不同，就是函数参数不再需要index，而是换成了boolean数组
+    public void backtracking(int[] nums,boolean[] used)&#123;
+        //当path存放的元素到了全排列的数组的大小就可以停止，并传入res中
+        if(path.size()==nums.length)&#123;
+            res.add(new ArrayList&lt;&gt;(path));
+            return;
+        &#125;
+        for(int i=0;i&lt;nums.length;i++)&#123;
+            //used数组就是记录path里面哪些元素已经被使用了，一个排列里元素只能使用一次
+            if(used[i]==true)
+                continue;
+            used[i]=true;
+            path.add(nums[i]);
+            backtracking(nums,used);
+            path.remove(path.size()-1);
+            used[i]=false;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="分析小结"><a href="#分析小结" class="headerlink" title="分析小结"></a>分析小结</h2><p>这个题目是回溯算法的另一个擅长的拿手好戏，全排列和子集、组合问题的最大不同就是不需要传起始地址，因为每一层的元素可以重复使用，但是在一个分支里每个元素都只能用一次。下面是我画的一张解空间树的图，可以加深理解。</p>
+<p><img src="https://pic.imgdb.cn/item/614d87952ab3f51d91e49384.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/614d87952ab3f51d91e49384.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
+<p>同时也想说，第一次使用画图工具，好难用，但是不用这个肯定画的又丑又难看懂。还是要继续努力，学习新知识！！！</p>
+
+  
+  
+    
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%203/>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%203/</a></p>
+              
+            
+          </blockquote>
+        </div>
+      
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-09-24T16:29:05+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年9月24日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>刷题心得</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%203/&title=刷题日记 day-3 - zsk's personal blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%203/&title=刷题日记 day-3 - zsk's personal blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%203/&title=刷题日记 day-3 - zsk's personal blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+        
+          
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/LeetCode/">LeetCode</a>
+    </a>
+  </div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：512字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：2分钟</p>
+    </a>
+  </div>
+
+
+        
+      
+    </div>
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%209/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>刷题日记 day-3</p>
+          <p class='content'>初识完全背包​        完全背包是背包问题的变形之一，老实说01背包我也才半知半解，今天看题解也还是雾中看花。完全背包就是背包只有一个，但是物品可以重复放入无数次。即每种物品有无数件。
+​...</p>
+        </a>
+      
+      
+        <a class='next' href='/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/'>
+          <p class='title'>刷题日记 day-2<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>写在前面好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一直没写主要是没啥兴趣，刷题在刚开始简直折磨，不夸张的说开始每一...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+  </article>
+
+
+
+
+
+
 </div>
 <aside class='l_side'>
   
@@ -561,11 +837,26 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
 
+  <section class="widget toc-wrapper floatable desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%A6%82%E8%BF%B0"><span class="toc-text">题目概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E4%BB%A3%E7%A0%81"><span class="toc-text">解决代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E5%B0%8F%E7%BB%93"><span class="toc-text">分析小结</span></a></li></ol>
+    </div>
+  </section>
+
 
   
 
 
 </aside>
+
 
 
 		  
@@ -574,8 +865,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="刷题日记 day-3";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要

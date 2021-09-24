@@ -22,7 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>所有标签 - zsk&#39;s personal blog</title>
+  <title>刷题日记 day-8 - zsk&#39;s personal blog</title>
+  
+    <meta name="keywords" content="刷题心得">
   
 
   
@@ -473,7 +475,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper tag search' style="display: none;">
+        <div id="full" class='cover-wrapper post search' style="display: none;">
           
             <div class='cover-bg lazyload placeholder' data-bg="https://static01.imgkr.com/temp/5a3186b4483b490eac34f6b6f0c5e3cb.jpg"></div>
           
@@ -535,23 +537,348 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper" id="pjax-container">
           
 
-
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
+
+
+  
+  <div class="article-meta" id="top">
     
-      <div class='post-wrapper'>
-        <article id="tag" class="post article white-box reveal shadow">
-          <h2>所有标签</h2>
-          <div class="all-tags">
-            
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/" rel="tag">刷题心得</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">2</span></li></ul>
-          </div>
-          <br>
+    
+    
+      <h1 class="title">
+        刷题日记 day-8
+      </h1>
+      <div class='new-meta-box'>
+        
           
-        </article>
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="">
+    <p>zsk</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/LeetCode/">LeetCode</a>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年9月24日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="刷题日记 day-8" data-path="/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%208/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
       </div>
     
+  </div>
+
+
   
+  
+  <h2 id="初探01背包问题"><a href="#初探01背包问题" class="headerlink" title="初探01背包问题"></a>初探01背包问题</h2><p>​        记得我第一次遇到01背包还是上学期，在算法课上听过老师讲动态规划和回溯的时候，当时觉得这个问题理解起来这么简单，为啥这么重要？当我开始想着写出它的代码。呵呵，一个菜鸡怎么可能会写代码呢。今天终于刷到了01背包问题，发现这个问题的原型是很简单不错，但是它的变形就不是那么容易看穿了。</p>
+<p>​        一切的动态规划最重要的就是找递推关系式，在这个问题中。我们的动规数组**dp[j]**，的含义是啥呢？它表示：容量为j的背包所能容纳的最大的物品价值。它的递推公式是：       **dp[j]=Math.max(dp[j],dp[j-weight[i]]+value[i]);**因为背包外的物品只有两个选择：放入背包或者不放入。所以背包的价值也就在这两个状态里产生，不放就是dp[j]，放进去了，就是之前背包的价值加上这个物品的价值。非常好理解！</p>
+<p>​        然后我们就要思考一下dp数组的初始化问题，很明显dp[0]肯定是0，因为背包内没有物品，自然也就没有最大价值一说了。</p>
+<p>​        再者就要考虑一下遍历顺序，我们必须<strong>倒序遍历数组</strong>。这是因为：<strong>为了保证物品i只会被放入一次！</strong></p>
+<blockquote>
+<p>例如：物品0的重量为weight[0]=1,其价值value[0]=15，</p>
+</blockquote>
+<p>那么将它放入背包容量为1的情况下：dp[1]=dp[1-weight[0]]+value[0]=15</p>
+<p>将它放入背包容量为2的情况下：dp[2]=dp[2-weight[0]]+value[0]=30;</p>
+<p>这时就会发现放入容量为2的背包的时候，最大价值应该是15，但是正序遍历的结果是30，这就是因为物品0被重复放入了。</p>
+<p>反之我们先放入容量为2背包，在放入容量为1的背包就不会出现这样的问题。</p>
+<p>​        下面有两个背包问题的实例，请仔细揣摩：</p>
+<h2 id="两个问题"><a href="#两个问题" class="headerlink" title="两个问题"></a>两个问题</h2><h3 id="问题一：416-分割等和子集"><a href="#问题一：416-分割等和子集" class="headerlink" title="问题一：416. 分割等和子集"></a>问题一：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/partition-equal-subset-sum/">416. 分割等和子集</a></h3><ul>
+<li><p>题目背景：给你一个 <strong>只包含正整数</strong> 的 <strong>非空</strong> 数组 <code>nums</code> 。请你判断是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。</p>
+</li>
+<li><p>题目实例：</p>
+<blockquote>
+<pre><code>输入：nums = [1,5,11,5]
+输出：true
+解释：数组可以分割成 [1, 5, 5] 和 [11] 。
+</code></pre>
+</blockquote>
+<blockquote>
+<pre><code>输入：nums = [1,2,3,5]
+输出：false
+解释：数组不能分割成两个元素和相等的子集。
+</code></pre>
+</blockquote>
+</li>
+</ul>
+<h3 id="问题二：1049-最后一块石头的重量-II"><a href="#问题二：1049-最后一块石头的重量-II" class="headerlink" title="问题二：1049. 最后一块石头的重量 II"></a>问题二：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/last-stone-weight-ii/">1049. 最后一块石头的重量 II</a></h3><ul>
+<li><p>题目背景：有一堆石头，用整数数组 stones 表示。其中 stones[i] 表示第 i 块石头的重量。</p>
+<p>每一回合，从中选出任意两块石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x &lt;= y。那么粉碎的可能结果如下：</p>
+<p>如果 x == y，那么两块石头都会被完全粉碎；<br>如果 x != y，那么重量为 x 的石头将会完全粉碎，而重量为 y 的石头新重量为 y-x。<br>最后，最多只会剩下一块 石头。返回此石头 最小的可能重量 。如果没有石头剩下，就返回 0。</p>
+</li>
+<li><p>题目实例：</p>
+<blockquote>
+<p>输入：stones = [2,7,4,1,8,1]<br>输出：1<br>解释：<br>组合 2 和 4，得到 2，所以数组转化为 [2,7,1,8,1]，<br>组合 7 和 8，得到 1，所以数组转化为 [2,1,1,1]，<br>组合 2 和 1，得到 1，所以数组转化为 [1,1,1]，<br>组合 1 和 1，得到 0，所以数组转化为 [1]，这就是最优值。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="解决代码"><a href="#解决代码" class="headerlink" title="解决代码"></a>解决代码</h2><h3 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h3><pre><code class="java">class Solution &#123;
+    public boolean canPartition(int[] nums) &#123;
+        int sum=0;
+        //初始化dp数组的容量
+        int[] dp=new int[200*100+1];
+        for(int i=0;i&lt;nums.length;i++)&#123;
+            sum+=nums[i];
+        &#125;
+        //如果不能分成完全相等的两堆或者说两个子集 就return false
+        if(sum%2==1) 
+            return false;
+        //我们的目标是在背包里尝试装入最大价值为sum/2的物品
+        int target=sum/2;
+        for(int i=0;i&lt;nums.length;i++)&#123;
+            //注意这里是逆向遍历
+            for(int j=target;j&gt;=nums[i];j--)&#123;
+                //递推公式 老套路了
+                dp[j]=Math.max(dp[j],dp[j-nums[i]]+nums[i]);
+            &#125;
+        &#125;
+        /*最后这个判断很灵性：如果背包容量为target时的最大价值也为target
+        就说明是可以分为最大子集为原数组集合的一半*/
+        if(dp[target]==target)
+            return true;
+
+        return false;
+    &#125;
+&#125;
+</code></pre>
+<h3 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h3><pre><code class="java">class Solution &#123;
+    public int lastStoneWeightII(int[] stones) &#123;
+        int sum=0;
+        int[] dp=new int[30*100/2+1];
+        for(int x:stones)&#123;
+            sum+=x;
+        &#125;
+        int target=sum/2;
+        for(int i=0;i&lt;stones.length;i++)&#123;
+            for(int j=target;j&gt;=stones[i];j--)&#123;
+                dp[j]=Math.max(dp[j],dp[j-stones[i]]+stones[i]);
+            &#125;
+        &#125;
+        return (sum-dp[target])-dp[target];
+    &#125;
+&#125;
+</code></pre>
+<h2 id="小结与分析"><a href="#小结与分析" class="headerlink" title="小结与分析"></a>小结与分析</h2><p>​        问题一的思路主要就是：将原数组划分成两个最大的子集，两个子集的和是相等的就return true。就可以理解为将原数组的元素放入一个背包，看看背包的最大值是否能达到原数组的一半。具体分析过程就在代码注释里面。</p>
+<p>​        问题二？ 看看代码不就会了？(狗头) 哈哈哈</p>
+
+  
+  
+    
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%208/>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%208/</a></p>
+              
+            
+          </blockquote>
+        </div>
+      
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-09-24T16:29:29+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年9月24日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>刷题心得</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%208/&title=刷题日记 day-8 - zsk's personal blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%208/&title=刷题日记 day-8 - zsk's personal blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%208/&title=刷题日记 day-8 - zsk's personal blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+        
+          
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/LeetCode/">LeetCode</a>
+    </a>
+  </div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：1.3k字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：5分钟</p>
+    </a>
+  </div>
+
+
+        
+      
+    </div>
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%207/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>刷题日记 day-7</p>
+          <p class='content'>何为动态规划​        动态规划就是Dynamic Programming，简称DP。如果解决一个问题需要解决它的很多重叠子问题，这个时候就需要用到动态规划。
+​        动态规划的...</p>
+        </a>
+      
+      
+        <a class='next' href='/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%209/'>
+          <p class='title'>刷题日记 day-3<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>初识完全背包​        完全背包是背包问题的变形之一，老实说01背包我也才半知半解，今天看题解也还是雾中看花。完全背包就是背包只有一个，但是物品可以重复放入无数次。即每种物品有无数件。
+​...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+  </article>
+
+
+
+
+
+
 </div>
 <aside class='l_side'>
   
@@ -561,11 +888,26 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
 
+  <section class="widget toc-wrapper floatable desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E6%8E%A201%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98"><span class="toc-text">初探01背包问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%A4%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="toc-text">两个问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80%EF%BC%9A416-%E5%88%86%E5%89%B2%E7%AD%89%E5%92%8C%E5%AD%90%E9%9B%86"><span class="toc-text">问题一：416. 分割等和子集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C%EF%BC%9A1049-%E6%9C%80%E5%90%8E%E4%B8%80%E5%9D%97%E7%9F%B3%E5%A4%B4%E7%9A%84%E9%87%8D%E9%87%8F-II"><span class="toc-text">问题二：1049. 最后一块石头的重量 II</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E4%BB%A3%E7%A0%81"><span class="toc-text">解决代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80"><span class="toc-text">问题一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C"><span class="toc-text">问题二</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%E4%B8%8E%E5%88%86%E6%9E%90"><span class="toc-text">小结与分析</span></a></li></ol>
+    </div>
+  </section>
+
 
   
 
 
 </aside>
+
 
 
 		  
@@ -574,8 +916,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="刷题日记 day-8";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要

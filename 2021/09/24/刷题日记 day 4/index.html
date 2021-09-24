@@ -22,7 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>所有标签 - zsk&#39;s personal blog</title>
+  <title>刷题日记 day-4 - zsk&#39;s personal blog</title>
+  
+    <meta name="keywords" content="刷题心得">
   
 
   
@@ -473,7 +475,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper tag search' style="display: none;">
+        <div id="full" class='cover-wrapper post search' style="display: none;">
           
             <div class='cover-bg lazyload placeholder' data-bg="https://static01.imgkr.com/temp/5a3186b4483b490eac34f6b6f0c5e3cb.jpg"></div>
           
@@ -535,23 +537,333 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper" id="pjax-container">
           
 
-
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
+
+
+  
+  <div class="article-meta" id="top">
     
-      <div class='post-wrapper'>
-        <article id="tag" class="post article white-box reveal shadow">
-          <h2>所有标签</h2>
-          <div class="all-tags">
-            
-            <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/" rel="tag">刷题心得</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">2</span></li></ul>
-          </div>
-          <br>
+    
+    
+      <h1 class="title">
+        刷题日记 day-4
+      </h1>
+      <div class='new-meta-box'>
+        
           
-        </article>
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="">
+    <p>zsk</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/LeetCode/">LeetCode</a>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年9月24日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="刷题日记 day-4" data-path="/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%204/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+
+          
+        
       </div>
     
+  </div>
+
+
   
+  
+  <h2 id="题目背景介绍"><a href="#题目背景介绍" class="headerlink" title="题目背景介绍"></a>题目背景介绍</h2><p>今天写的是回溯算法解决的n皇后，在LeetCode上是第51题，难度是困难！</p>
+<p>n 皇后问题 研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。</p>
+<p>给你一个整数 n ，返回所有不同的 n 皇后问题 的解决方案。</p>
+<p>每一种解法包含一个不同的 n 皇后问题 的棋子放置方案，该方案中 ‘Q’ 和 ‘.’ 分别代表了皇后和空位。</p>
+<p>![](C:\Users\86153\Pictures\Camera Roll\素材1.png)</p>
+<p>首先来看一下皇后们的约束条件：</p>
+<ol>
+<li><strong>不能同行</strong></li>
+<li><strong>不能同列</strong></li>
+<li><strong>不能同斜线</strong></li>
+</ol>
+<p><em><strong>唉，是个在二维数组上的回溯，这可咋整呢？</strong></em></p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><pre><code class="java">class Solution &#123;
+    List&lt;List&lt;String&gt;&gt; res=new ArrayList&lt;&gt;();//存放正确的结果集合
+    public List&lt;List&lt;String&gt;&gt; solveNQueens(int n) &#123;
+        char[][] chessboard=new char[n][n];//定义一个棋盘数组
+        //下面给棋盘数组赋值这个方式很轻巧，值得借鉴
+        for(char[] c:chessboard)&#123;
+            Arrays.fill(c,&#39;.&#39;);
+        &#125;
+        backtracking(n,0,chessboard);
+        return res;
+    &#125;
+    public void backtracking(int n,int row,char[][] chessboard)&#123;
+        //函数参数row指的是棋盘的行数，也是递归树的深度
+        if(row==n)&#123;
+            //当棋盘的行数等于n，就说明每一行都正确摆放了Q，可以加入正确的结果集合res
+            res.add(new ArrayList&lt;&gt;(transform(chessboard)));
+            return;
+        &#125;
+        for(int col=0;col&lt;n;++col)&#123;
+            //这里的col指的是棋盘的列数，先判断当前棋盘的情况是不是满足要求
+            if(check(row,col,n,chessboard))&#123;
+                chessboard[row][col]=&#39;Q&#39;;//处理棋盘
+                backtracking(n,row+1,chessboard);
+                chessboard[row][col]=&#39;.&#39;;//回溯 撤销处理棋盘的操作
+            &#125;
+        &#125;
+    &#125;
+    public List transform(char[][] chessboard)&#123;
+        //这个函数是将字符二维数组转化为list
+        List&lt;String&gt; path=new ArrayList&lt;&gt;();
+        for(char[] c:chessboard)&#123;
+            path.add(String.copyValueOf(c));
+        &#125;
+        return path;
+    &#125;
+    public boolean check(int row,int col,int n,char[][] chessboard)&#123;
+         // 这个函数是检查棋盘的现状是否满足条件，主要从三个方面纵的方向不能有多个Q
+         // 两个对角线上不能有多个Q
+        
+        for(int i=0;i&lt;n;i++)&#123;
+            //检查列
+            if(chessboard[i][col]==&#39;Q&#39;)
+                return false;
+        &#125;
+        
+        for(int i=row-1,j=col-1;i&gt;=0&amp;&amp;j&gt;=0;i--,j--)&#123;
+            //检查45度对角线
+            if(chessboard[i][j]==&#39;Q&#39;)
+                return false;
+        &#125;
+       
+        for(int i=row-1,j=col+1;i&gt;=0&amp;&amp;j&lt;=n-1;i--,j++)&#123;
+             //检查135度对角线
+            if(chessboard[i][j]==&#39;Q&#39;)
+                return false;
+        &#125;
+        return true;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="分析与小结"><a href="#分析与小结" class="headerlink" title="分析与小结"></a>分析与小结</h2><p>先来看看我画的递归树吧，这样讲的比较清晰。</p>
+<p><img src="https://pic.imgdb.cn/item/614d87952ab3f51d91e49384.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/614d87952ab3f51d91e49384.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
+<p>可以看出来递归树的深度由棋盘的行数决定，每一层的情况由棋盘的列数决定。这也就是我们写题的着手方向。这个题比较需要注意的点在于这个图的建立，以及检查函数里对角线的排查，至于为啥不排查每一行的元素？这个你看图，每一行的Q都是独立的，所以不需要。这个不是我自己想出来的，是看别的大佬的题解。但弄懂以及把那个图画好也花了我不少时间。任重道远，仍需不断前行！</p>
+
+  
+  
+    
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%204/>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%204/</a></p>
+              
+            
+          </blockquote>
+        </div>
+      
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-09-24T16:29:10+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2021年9月24日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>刷题心得</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%204/&title=刷题日记 day-4 - zsk's personal blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%204/&title=刷题日记 day-4 - zsk's personal blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%204/&title=刷题日记 day-4 - zsk's personal blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+        
+          
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/LeetCode/">LeetCode</a>
+    </a>
+  </div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>字数：827字</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>时长：3分钟</p>
+    </a>
+  </div>
+
+
+        
+      
+    </div>
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20Day01/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>刷题日记 day-1</p>
+          <p class='content'>34. 在排序数组中查找元素的第一个和最后一个位置题目描述给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。
+如果数组中不存在目标...</p>
+        </a>
+      
+      
+        <a class='next' href='/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%2010/'>
+          <p class='title'>刷题日记 day-10<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>写在前面​        李奶奶的动态规划！！！真的觉得自己智商过低，不适合刷动态规划。于是我找了一个稍微简单一点的链表问题，题目来自于：**LeetCode 143. 重排链表**，这个题目的...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+  </article>
+
+
+
+
+
+
 </div>
 <aside class='l_side'>
   
@@ -561,11 +873,26 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
 
+  <section class="widget toc-wrapper floatable desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E8%83%8C%E6%99%AF%E4%BB%8B%E7%BB%8D"><span class="toc-text">题目背景介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E4%B8%8E%E5%B0%8F%E7%BB%93"><span class="toc-text">分析与小结</span></a></li></ol>
+    </div>
+  </section>
+
 
   
 
 
 </aside>
+
 
 
 		  
@@ -574,8 +901,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="刷题日记 day-4";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
