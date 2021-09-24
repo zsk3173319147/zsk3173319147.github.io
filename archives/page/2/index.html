@@ -240,7 +240,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
                   
                   
                   >
-                  好玩
+                  <i class='icon-haowanjishi fa-fw'></i>好玩
                 </a>
                 
                   <ul class="list-v">
@@ -404,7 +404,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
                   
                   
                   >
-                  好玩
+                  <i class='icon-haowanjishi fa-fw'></i>好玩
                 </a>
                 
                   <ul class="list-v">
@@ -597,22 +597,6 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 				
 					
 						<div class='timenode'>
-								<a class="meta" href="/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%206/">
-									<time>09-24</time>
-									
-										刷题日记 day-6
-									
-									
-									
-									
-								</a>
-						</div>
-				
-			
-				
-				
-					
-						<div class='timenode'>
 								<a class="meta" href="/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%205/">
 									<time>09-24</time>
 									
@@ -629,10 +613,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 				
 					
 						<div class='timenode'>
-								<a class="meta" href="/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%208/">
+								<a class="meta" href="/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%206/">
 									<time>09-24</time>
 									
-										刷题日记 day-8
+										刷题日记 day-6
 									
 									
 									
@@ -661,7 +645,23 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 				
 					
 						<div class='timenode'>
-								<a class="meta" href="/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%203/">
+								<a class="meta" href="/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%208/">
+									<time>09-24</time>
+									
+										刷题日记 day-8
+									
+									
+									
+									
+								</a>
+						</div>
+				
+			
+				
+				
+					
+						<div class='timenode'>
+								<a class="meta" href="/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%209/">
 									<time>09-24</time>
 									
 										刷题日记 day-3
@@ -693,10 +693,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 				
 					
 						<div class='timenode'>
-								<a class="meta" href="/2021/09/24/%E6%A0%87%E7%AD%BE%E6%B5%8B%E8%AF%95/">
+								<a class="meta" href="/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%203/">
 									<time>09-24</time>
 									
-										标签测试
+										刷题日记 day-3
 									
 									
 									
@@ -709,10 +709,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 				
 					
 						<div class='timenode'>
-								<a class="meta" href="/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%209/">
+								<a class="meta" href="/2021/09/24/%E6%A0%87%E7%AD%BE%E6%B5%8B%E8%AF%95/">
 									<time>09-24</time>
 									
-										刷题日记 day-3
+										标签测试
 									
 									
 									
@@ -971,7 +971,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Fri Sep 24 2021 18:05:12 GMT+0800 (GMT+08:00)</div>
+            <div id="last-update" style="display: none;">Fri Sep 24 2021 19:34:24 GMT+0800 (GMT+08:00)</div>
             <div id="last-update-show">2021-09-24 日</div>
           
         </div>
@@ -1323,6 +1323,8 @@ var loadCSS = function( href, before, media, attributes ){
   
   loadCSS("https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css", window.volantis.loadcss);
   
+  
+  loadCSS("https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/vs2015.css", window.volantis.loadcss);
   
 </script>
 <!-- required -->
@@ -1913,6 +1915,33 @@ $(function () {
 
 
 
+  
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10/build/highlight.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js">
+</script>
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+<script>
+	hljs.initLineNumbersOnLoad({
+		singleLine: true
+	});
+</script>
+
+<script>
+	volantis.pjax.push(() => {
+		document.querySelectorAll('pre code').forEach((block) => {
+			hljs.highlightBlock(block);
+			hljs.lineNumbersBlock(block, {
+				singleLine: true
+			});
+		});
+	}, "highlightjs")
+</script>
+
+
 
 
   <script defer>
@@ -2387,8 +2416,8 @@ document.addEventListener("pjax:success", listennSidebarTOC);
 </script>
  
 	  
-    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+    </div>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
   <!-- 数字雨 -->
   <canvas id="canvas" width="1440" height="900"></canvas>
   <script type="text/javascript" src="/js/DigitalRain.js"></script>

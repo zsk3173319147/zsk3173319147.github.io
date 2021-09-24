@@ -238,7 +238,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
                   
                   
                   >
-                  好玩
+                  <i class='icon-haowanjishi fa-fw'></i>好玩
                 </a>
                 
                   <ul class="list-v">
@@ -402,7 +402,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
                   
                   
                   >
-                  好玩
+                  <i class='icon-haowanjishi fa-fw'></i>好玩
                 </a>
                 
                   <ul class="list-v">
@@ -822,6 +822,8 @@ var loadCSS = function( href, before, media, attributes ){
   
   loadCSS("https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css", window.volantis.loadcss);
   
+  
+  loadCSS("https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/vs2015.css", window.volantis.loadcss);
   
 </script>
 <!-- required -->
@@ -1412,6 +1414,33 @@ $(function () {
 
 
 
+  
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10/build/highlight.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js">
+</script>
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+<script>
+	hljs.initLineNumbersOnLoad({
+		singleLine: true
+	});
+</script>
+
+<script>
+	volantis.pjax.push(() => {
+		document.querySelectorAll('pre code').forEach((block) => {
+			hljs.highlightBlock(block);
+			hljs.lineNumbersBlock(block, {
+				singleLine: true
+			});
+		});
+	}, "highlightjs")
+</script>
+
+
 
 
   <script defer>
@@ -1886,8 +1915,8 @@ document.addEventListener("pjax:success", listennSidebarTOC);
 </script>
  
 	  
-    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+    </div>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
   <!-- 数字雨 -->
   <canvas id="canvas" width="1440" height="900"></canvas>
   <script type="text/javascript" src="/js/DigitalRain.js"></script>

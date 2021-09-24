@@ -240,7 +240,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
                   
                   
                   >
-                  好玩
+                  <i class='icon-haowanjishi fa-fw'></i>好玩
                 </a>
                 
                   <ul class="list-v">
@@ -404,7 +404,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
                   
                   
                   >
-                  好玩
+                  <i class='icon-haowanjishi fa-fw'></i>好玩
                 </a>
                 
                   <ul class="list-v">
@@ -845,16 +845,17 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%205/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>刷题日记 day-5</p>
-          <p class='content'>初探贪心算法​        终于结束了回溯，老实说回溯是真的有点难，虽然有模板，但是很多问题的解决方式不尽相同。刷了也有20道题差不多，但是真正有印象的就几题。不过现在学到贪心了，我有点难受。...</p>
+        <a class='prev' href='/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%207/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>刷题日记 day-7</p>
+          <p class='content'>何为动态规划​        动态规划就是Dynamic Programming，简称DP。如果解决一个问题需要解决它的很多重叠子问题，这个时候就需要用到动态规划。
+​        动态规划的...</p>
         </a>
       
       
-        <a class='next' href='/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%207/'>
-          <p class='title'>刷题日记 day-7<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>何为动态规划​        动态规划就是Dynamic Programming，简称DP。如果解决一个问题需要解决它的很多重叠子问题，这个时候就需要用到动态规划。
-​        动态规划的...</p>
+        <a class='next' href='/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%209/'>
+          <p class='title'>刷题日记 day-3<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>初识完全背包​        完全背包是背包问题的变形之一，老实说01背包我也才半知半解，今天看题解也还是雾中看花。完全背包就是背包只有一个，但是物品可以重复放入无数次。即每种物品有无数件。
+​...</p>
         </a>
       
     </div>
@@ -1163,6 +1164,8 @@ var loadCSS = function( href, before, media, attributes ){
   
   loadCSS("https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css", window.volantis.loadcss);
   
+  
+  loadCSS("https://cdn.jsdelivr.net/npm/highlight.js@10.6.0/styles/vs2015.css", window.volantis.loadcss);
   
 </script>
 <!-- required -->
@@ -1753,6 +1756,33 @@ $(function () {
 
 
 
+  
+
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10/build/highlight.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js">
+</script>
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+<script>
+	hljs.initLineNumbersOnLoad({
+		singleLine: true
+	});
+</script>
+
+<script>
+	volantis.pjax.push(() => {
+		document.querySelectorAll('pre code').forEach((block) => {
+			hljs.highlightBlock(block);
+			hljs.lineNumbersBlock(block, {
+				singleLine: true
+			});
+		});
+	}, "highlightjs")
+</script>
+
+
 
 
   <script defer>
@@ -2227,8 +2257,8 @@ document.addEventListener("pjax:success", listennSidebarTOC);
 </script>
  
 	  
-    </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+    </div>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
   <!-- 数字雨 -->
   <canvas id="canvas" width="1440" height="900"></canvas>
   <script type="text/javascript" src="/js/DigitalRain.js"></script>
