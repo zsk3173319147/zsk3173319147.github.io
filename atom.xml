@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-09-24T11:07:28.694Z</updated>
+  <updated>2021-09-24T09:00:34.973Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,19 +17,18 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>刷题日记 day-4</title>
-    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%204/"/>
-    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%204/</id>
+    <title>刷题日记 day-1</title>
+    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20Day01/"/>
+    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20Day01/</id>
     <published>2021-09-23T16:00:00.000Z</published>
-    <updated>2021-09-24T11:07:28.694Z</updated>
+    <updated>2021-09-24T09:00:34.973Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="题目背景介绍"><a href="#题目背景介绍" class="headerlink" title="题目背景介绍"></a>题目背景介绍</h2><p>今天写的是回溯算法解决的n皇后，在LeetCode上是第51题，难度是困难！</p><p>n 皇后问题 研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。</p><p>给你一个整数 n ，返回所有不同的 n 皇后问题 的解决方案。</p><p>每一种解法包含一个不同的 n 皇后问题 的棋子放置方案，该方案中 ‘Q’ 和 ‘.’ 分别代表了皇后和空位。</p><p><img src="https://pic.imgdb.cn/item/614db15d2ab3f51d911b7a94.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/614db15d2ab3f51d911b7a94.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p><p>首先来看一下皇后们的约束条件：</p><ol><li><strong>不能同行</strong></li><li><strong>不能同列</strong></li><li><strong>不能同斜线</strong></li></ol><p><em><strong>唉，是个在二维数组上的回溯，这可咋整呢？</strong></em></p><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><pre><code class="java">class Solution &#123;    List&lt;List&lt;String&gt;&gt; res=new ArrayList&lt;&gt;();//存放正确的结果集合    public List&lt;List&lt;String&gt;&gt; solveNQueens(int n) &#123;        char[][] chessboard=new char[n][n];//定义一个棋盘数组        //下面给棋盘数组赋值这个方式很轻巧，值得借鉴        for(char[] c:chessboard)&#123;            Arrays.fill(c,&#39;.&#39;);        &#125;        backtracking(n,0,chessboard);        return res;    &#125;    public void backtracking(int n,int row,char[][] chessboard)&#123;        //函数参数row指的是棋盘的行数，也是递归树的深度        if(row==n)&#123;            //当棋盘的行数等于n，就说明每一行都正确摆放了Q，可以加入正确的结果集合res            res.add(new ArrayList&lt;&gt;(transform(chessboard)));            return;        &#125;        for(int col=0;col&lt;n;++col)&#123;            //这里的col指的是棋盘的列数，先判断当前棋盘的情况是不是满足要求            if(check(row,col,n,chessboard))&#123;                chessboard[row][col]=&#39;Q&#39;;//处理棋盘                backtracking(n,row+1,chessboard);                chessboard[row][col]=&#39;.&#39;;//回溯 撤销处理棋盘的操作            &#125;        &#125;    &#125;    public List transform(char[][] chessboard)&#123;        //这个函数是将字符二维数组转化为list        List&lt;String&gt; path=new ArrayList&lt;&gt;();        for(char[] c:chessboard)&#123;            path.add(String.copyValueOf(c));        &#125;        return path;    &#125;    public boolean check(int row,int col,int n,char[][] chessboard)&#123;         // 这个函数是检查棋盘的现状是否满足条件，主要从三个方面纵的方向不能有多个Q         // 两个对角线上不能有多个Q                for(int i=0;i&lt;n;i++)&#123;            //检查列            if(chessboard[i][col]==&#39;Q&#39;)                return false;        &#125;                for(int i=row-1,j=col-1;i&gt;=0&amp;&amp;j&gt;=0;i--,j--)&#123;            //检查45度对角线            if(chessboard[i][j]==&#39;Q&#39;)                return false;        &#125;               for(int i=row-1,j=col+1;i&gt;=0&amp;&amp;j&lt;=n-1;i--,j++)&#123;             //检查135度对角线            if(chessboard[i][j]==&#39;Q&#39;)                return false;        &#125;        return true;    &#125;&#125;</code></pre><h2 id="分析与小结"><a href="#分析与小结" class="headerlink" title="分析与小结"></a>分析与小结</h2><p>先来看看我画的递归树吧，这样讲的比较清晰。</p><p><img src="https://pic.imgdb.cn/item/614d881a2ab3f51d91e55336.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/614d881a2ab3f51d91e55336.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p><p>可以看出来递归树的深度由棋盘的行数决定，每一层的情况由棋盘的列数决定。这也就是我们写题的着手方向。这个题比较需要注意的点在于这个图的建立，以及检查函数里对角线的排查，至于为啥不排查每一行的元素？这个你看图，每一行的Q都是独立的，所以不需要。这个不是我自己想出来的，是看别的大佬的题解。但弄懂以及把那个图画好也花了我不少时间。任重道远，仍需不断前行！</p>]]></content>
+    <content type="html"><![CDATA[<h3 id="34-在排序数组中查找元素的第一个和最后一个位置"><a href="#34-在排序数组中查找元素的第一个和最后一个位置" class="headerlink" title="34. 在排序数组中查找元素的第一个和最后一个位置"></a><a href="https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/">34. 在排序数组中查找元素的第一个和最后一个位置</a></h3><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。</p><p>如果数组中不存在目标值 target，返回 [-1, -1]。</p><h4 id="主要思路"><a href="#主要思路" class="headerlink" title="主要思路"></a>主要思路</h4><p>仔细一看这就是二分查找的应用典型呀，虽然我知道要用二分查找，但是在做的时候还是没有一个明确的思路，搞了一晚上还是没能攻破，诶，看了题解以后就感觉好简单。分析一下我下面写的代码，防止以后再看的时候就看不懂了。</p><ol><li><p>这个Solution包括三个函数，第一个就是主函数，第二个和第三个如名字一样，分别是寻找target在数组的第一个位置和最后一次出现的位置，二分查找的最重要的代码体就是：</p><pre><code class="java">int left=0;int right=nums.length-1;while(left&lt;=right)&#123;    int mid=left+(right-left)/2;    if(nums[mid]&gt;target)        right=mid-1;    if(nums[mid]&lt;target)        left=mid+1;&#125;return left;</code></pre></li></ol><ol start="2"><li> <em><strong>注释1</strong></em>这个地方为啥多此一举 (right=mid-1;) ？这个是为了找到第一个出现target位置的操作，注释2这个地方加一个判断就是要搞清楚在数组里找没找到target，这两个地方都是针对这个题目做出的改变。</li></ol><ol start="3"><li>整体来说，就是利用二分查找在数组里找了两次target，分别找到第一个和最后一个出现target的位置。</li></ol><h4 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h4><pre><code class="java">class Solution &#123;    public int[] searchRange(int[] nums, int target) &#123;        int firstPosition=searchFirstPosition(nums,target);        if(nums.length==0||firstPosition==-1)        return new int[]&#123;-1,-1&#125;;        int lastPosition=searchLastPosition(nums,target);        return new int[]&#123;firstPosition,lastPosition&#125;;        &#125;    public int searchFirstPosition(int[] nums,int target)&#123;        int left=0;        int right=nums.length-1;        while(left&lt;=right)        &#123;            int mid=left+(right-left)/2;            if(nums[mid]==target)//注释1                right=mid-1;            else if(nums[mid]&lt;target)                left=mid+1;            else right=mid-1;        &#125;        if(left!=nums.length&amp;&amp;nums[left]==target)//注释2            return left;        else            return -1;    &#125;    public int searchLastPosition(int[] nums,int target)&#123;        int left=0;        int right=nums.length-1;        while(left&lt;=right)        &#123;            int mid=left+(right-left)/2;            if(nums[mid]==target)                left=mid+1;            else if(nums[mid]&lt;target)                left=mid+1;            else right=mid-1;        &#125;        return right;    &#125;&#125;</code></pre><h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>二分查找很有精神！！！</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;h2 id=&quot;题目背景介绍&quot;&gt;&lt;a href=&quot;#题目背景介绍&quot; class=&quot;headerlink&quot; title=&quot;题目背景介绍&quot;&gt;&lt;/a&gt;题目背景介绍&lt;/h2&gt;&lt;p&gt;今天写的是回溯算法解决的n皇后，在LeetCode上是第51题，难度是困难！&lt;/p&gt;
-&lt;p&gt;n 皇后问题 研</summary>
+    <summary type="html">&lt;h3 id=&quot;34-在排序数组中查找元素的第一个和最后一个位置&quot;&gt;&lt;a href=&quot;#34-在排序数组中查找元素的第一个和最后一个位置&quot; class=&quot;headerlink&quot; title=&quot;34. 在排序数组中查找元素的第一个和最后一个位置&quot;&gt;&lt;/a&gt;&lt;a href=&quot;http</summary>
       
     
     
@@ -66,30 +65,6 @@
   </entry>
   
   <entry>
-    <title>刷题日记 day-1</title>
-    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20Day01/"/>
-    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20Day01/</id>
-    <published>2021-09-23T16:00:00.000Z</published>
-    <updated>2021-09-24T09:00:34.973Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="34-在排序数组中查找元素的第一个和最后一个位置"><a href="#34-在排序数组中查找元素的第一个和最后一个位置" class="headerlink" title="34. 在排序数组中查找元素的第一个和最后一个位置"></a><a href="https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/">34. 在排序数组中查找元素的第一个和最后一个位置</a></h3><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><p>给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。</p><p>如果数组中不存在目标值 target，返回 [-1, -1]。</p><h4 id="主要思路"><a href="#主要思路" class="headerlink" title="主要思路"></a>主要思路</h4><p>仔细一看这就是二分查找的应用典型呀，虽然我知道要用二分查找，但是在做的时候还是没有一个明确的思路，搞了一晚上还是没能攻破，诶，看了题解以后就感觉好简单。分析一下我下面写的代码，防止以后再看的时候就看不懂了。</p><ol><li><p>这个Solution包括三个函数，第一个就是主函数，第二个和第三个如名字一样，分别是寻找target在数组的第一个位置和最后一次出现的位置，二分查找的最重要的代码体就是：</p><pre><code class="java">int left=0;int right=nums.length-1;while(left&lt;=right)&#123;    int mid=left+(right-left)/2;    if(nums[mid]&gt;target)        right=mid-1;    if(nums[mid]&lt;target)        left=mid+1;&#125;return left;</code></pre></li></ol><ol start="2"><li> <em><strong>注释1</strong></em>这个地方为啥多此一举 (right=mid-1;) ？这个是为了找到第一个出现target位置的操作，注释2这个地方加一个判断就是要搞清楚在数组里找没找到target，这两个地方都是针对这个题目做出的改变。</li></ol><ol start="3"><li>整体来说，就是利用二分查找在数组里找了两次target，分别找到第一个和最后一个出现target的位置。</li></ol><h4 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h4><pre><code class="java">class Solution &#123;    public int[] searchRange(int[] nums, int target) &#123;        int firstPosition=searchFirstPosition(nums,target);        if(nums.length==0||firstPosition==-1)        return new int[]&#123;-1,-1&#125;;        int lastPosition=searchLastPosition(nums,target);        return new int[]&#123;firstPosition,lastPosition&#125;;        &#125;    public int searchFirstPosition(int[] nums,int target)&#123;        int left=0;        int right=nums.length-1;        while(left&lt;=right)        &#123;            int mid=left+(right-left)/2;            if(nums[mid]==target)//注释1                right=mid-1;            else if(nums[mid]&lt;target)                left=mid+1;            else right=mid-1;        &#125;        if(left!=nums.length&amp;&amp;nums[left]==target)//注释2            return left;        else            return -1;    &#125;    public int searchLastPosition(int[] nums,int target)&#123;        int left=0;        int right=nums.length-1;        while(left&lt;=right)        &#123;            int mid=left+(right-left)/2;            if(nums[mid]==target)                left=mid+1;            else if(nums[mid]&lt;target)                left=mid+1;            else right=mid-1;        &#125;        return right;    &#125;&#125;</code></pre><h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>二分查找很有精神！！！</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h3 id=&quot;34-在排序数组中查找元素的第一个和最后一个位置&quot;&gt;&lt;a href=&quot;#34-在排序数组中查找元素的第一个和最后一个位置&quot; class=&quot;headerlink&quot; title=&quot;34. 在排序数组中查找元素的第一个和最后一个位置&quot;&gt;&lt;/a&gt;&lt;a href=&quot;http</summary>
-      
-    
-    
-    
-    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
-    
-    
-    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
-    
-  </entry>
-  
-  <entry>
     <title>刷题日记 day-5</title>
     <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%205/"/>
     <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%205/</id>
@@ -114,18 +89,19 @@
   </entry>
   
   <entry>
-    <title>刷题日记 day-6</title>
-    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%206/"/>
-    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%206/</id>
+    <title>刷题日记 day-4</title>
+    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%204/"/>
+    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%204/</id>
     <published>2021-09-23T16:00:00.000Z</published>
-    <updated>2021-09-24T08:29:19.641Z</updated>
+    <updated>2021-09-24T11:07:28.694Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>这两天被贪心折磨，贪心真的很难想到，初看题目有点看不懂，好不容易推演了两个测试，明白了题目的用意，但还是无从下手。一看题解代码和分析，就感觉自己是个傻zi。</p><blockquote><p>今天写了两个贪心的题目，<a href="https://leetcode-cn.com/problems/monotone-increasing-digits/">738. 单调递增的数字</a>以及<a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">714. 买卖股票的最佳时机含手续费</a>，这两题的代码都很简单，但都非常难想到。</p></blockquote><h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><ol start="738"><li>单调递增的数字</li></ol><pre><code class="java">class Solution &#123;    //解法一：暴力解法 很容易想到但是会超时    public int monotoneIncreasingDigits(int n) &#123;        for(int i=n;i&gt;0;i--)&#123;            if(check(i))                return i;        &#125;        return 0;    &#125;    public boolean check(int num)&#123;        int max=10;        while(num!=0)&#123;            int t=num%10;//取出最后一位元素            if(t&lt;=max)&#123;                max=t;            &#125;else&#123;                return false;            &#125;            num/=10;        &#125;        return true;    &#125;&#125;</code></pre><pre><code class="java">class Solution &#123;    /*解法二：从后往前遍历 n转化为字符数组a后 若a[i]&lt;a[i-1] 说明不是递增的 要进行调整    具体操作就是吧a[i-1]减一，以及把i以后的数字全部变成9，听起来很抽象。    如：n等于332 它的变化顺序是 332-&gt;329-&gt;299 这样经过两次调整就能得到正确结果，而且这    个算法时间复杂度是O(n).    */    public int monotoneIncreasingDigits(int n) &#123;        String s=String.valueOf(n);//转换成字符串更简单        int len=s.length();        int flag=len;        char[] a=s.toCharArray();        for(int i=len-1;i&gt;=1;i--)&#123;            if(a[i]&lt;a[i-1])&#123;                flag=i;                a[i-1]--;            &#125;        &#125;        for(int i=flag;i&lt;len;i++)&#123;            a[i]=&#39;9&#39;;        &#125;        return Integer.parseInt(new String(a));    &#125;&#125;</code></pre><ol start="714"><li><em><strong>买卖股票的最佳时机含手续费</strong></em></li></ol><pre><code class="java">class Solution &#123;    public int maxProfit(int[] prices, int fee) &#123;        int minPay=prices[0]+fee;        int sum=0;        for(int i:prices)&#123;            if(i+fee&lt;minPay)                minPay=i+fee;            else if(i&gt;minPay)&#123;                sum+=i-minPay;                minPay=i;            &#125;        &#125;        return sum;    &#125;&#125;</code></pre><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>第二个题太难想到了，我也不想写啥分析，头晕。好在是终于结束了贪心(仓促)，明天动态规划！</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="题目背景介绍"><a href="#题目背景介绍" class="headerlink" title="题目背景介绍"></a>题目背景介绍</h2><p>今天写的是回溯算法解决的n皇后，在LeetCode上是第51题，难度是困难！</p><p>n 皇后问题 研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。</p><p>给你一个整数 n ，返回所有不同的 n 皇后问题 的解决方案。</p><p>每一种解法包含一个不同的 n 皇后问题 的棋子放置方案，该方案中 ‘Q’ 和 ‘.’ 分别代表了皇后和空位。</p><p><img src="https://pic.imgdb.cn/item/614db15d2ab3f51d911b7a94.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/614db15d2ab3f51d911b7a94.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p><p>首先来看一下皇后们的约束条件：</p><ol><li><strong>不能同行</strong></li><li><strong>不能同列</strong></li><li><strong>不能同斜线</strong></li></ol><p><em><strong>唉，是个在二维数组上的回溯，这可咋整呢？</strong></em></p><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><pre><code class="java">class Solution &#123;    List&lt;List&lt;String&gt;&gt; res=new ArrayList&lt;&gt;();//存放正确的结果集合    public List&lt;List&lt;String&gt;&gt; solveNQueens(int n) &#123;        char[][] chessboard=new char[n][n];//定义一个棋盘数组        //下面给棋盘数组赋值这个方式很轻巧，值得借鉴        for(char[] c:chessboard)&#123;            Arrays.fill(c,&#39;.&#39;);        &#125;        backtracking(n,0,chessboard);        return res;    &#125;    public void backtracking(int n,int row,char[][] chessboard)&#123;        //函数参数row指的是棋盘的行数，也是递归树的深度        if(row==n)&#123;            //当棋盘的行数等于n，就说明每一行都正确摆放了Q，可以加入正确的结果集合res            res.add(new ArrayList&lt;&gt;(transform(chessboard)));            return;        &#125;        for(int col=0;col&lt;n;++col)&#123;            //这里的col指的是棋盘的列数，先判断当前棋盘的情况是不是满足要求            if(check(row,col,n,chessboard))&#123;                chessboard[row][col]=&#39;Q&#39;;//处理棋盘                backtracking(n,row+1,chessboard);                chessboard[row][col]=&#39;.&#39;;//回溯 撤销处理棋盘的操作            &#125;        &#125;    &#125;    public List transform(char[][] chessboard)&#123;        //这个函数是将字符二维数组转化为list        List&lt;String&gt; path=new ArrayList&lt;&gt;();        for(char[] c:chessboard)&#123;            path.add(String.copyValueOf(c));        &#125;        return path;    &#125;    public boolean check(int row,int col,int n,char[][] chessboard)&#123;         // 这个函数是检查棋盘的现状是否满足条件，主要从三个方面纵的方向不能有多个Q         // 两个对角线上不能有多个Q                for(int i=0;i&lt;n;i++)&#123;            //检查列            if(chessboard[i][col]==&#39;Q&#39;)                return false;        &#125;                for(int i=row-1,j=col-1;i&gt;=0&amp;&amp;j&gt;=0;i--,j--)&#123;            //检查45度对角线            if(chessboard[i][j]==&#39;Q&#39;)                return false;        &#125;               for(int i=row-1,j=col+1;i&gt;=0&amp;&amp;j&lt;=n-1;i--,j++)&#123;             //检查135度对角线            if(chessboard[i][j]==&#39;Q&#39;)                return false;        &#125;        return true;    &#125;&#125;</code></pre><h2 id="分析与小结"><a href="#分析与小结" class="headerlink" title="分析与小结"></a>分析与小结</h2><p>先来看看我画的递归树吧，这样讲的比较清晰。</p><p><img src="https://pic.imgdb.cn/item/614d881a2ab3f51d91e55336.png" class="lazyload" data-srcset="https://pic.imgdb.cn/item/614d881a2ab3f51d91e55336.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p><p>可以看出来递归树的深度由棋盘的行数决定，每一层的情况由棋盘的列数决定。这也就是我们写题的着手方向。这个题比较需要注意的点在于这个图的建立，以及检查函数里对角线的排查，至于为啥不排查每一行的元素？这个你看图，每一行的Q都是独立的，所以不需要。这个不是我自己想出来的，是看别的大佬的题解。但弄懂以及把那个图画好也花了我不少时间。任重道远，仍需不断前行！</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;这两天被贪心折磨，贪心真的很难想到，初看题目有点看不懂，好不容易推演了两个测试，明白了题目的用意，但还是无从下手。一看题解代</summary>
+    <summary type="html">&lt;h2 id=&quot;题目背景介绍&quot;&gt;&lt;a href=&quot;#题目背景介绍&quot; class=&quot;headerlink&quot; title=&quot;题目背景介绍&quot;&gt;&lt;/a&gt;题目背景介绍&lt;/h2&gt;&lt;p&gt;今天写的是回溯算法解决的n皇后，在LeetCode上是第51题，难度是困难！&lt;/p&gt;
+&lt;p&gt;n 皇后问题 研</summary>
       
     
     
@@ -150,6 +126,30 @@
       
       
     <summary type="html">&lt;h2 id=&quot;初探01背包问题&quot;&gt;&lt;a href=&quot;#初探01背包问题&quot; class=&quot;headerlink&quot; title=&quot;初探01背包问题&quot;&gt;&lt;/a&gt;初探01背包问题&lt;/h2&gt;&lt;p&gt;​        记得我第一次遇到01背包还是上学期，在算法课上听过老师讲动态规划和回溯的时</summary>
+      
+    
+    
+    
+    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
+    
+    
+    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>刷题日记 day-6</title>
+    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%206/"/>
+    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%206/</id>
+    <published>2021-09-23T16:00:00.000Z</published>
+    <updated>2021-09-24T08:29:19.641Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>这两天被贪心折磨，贪心真的很难想到，初看题目有点看不懂，好不容易推演了两个测试，明白了题目的用意，但还是无从下手。一看题解代码和分析，就感觉自己是个傻zi。</p><blockquote><p>今天写了两个贪心的题目，<a href="https://leetcode-cn.com/problems/monotone-increasing-digits/">738. 单调递增的数字</a>以及<a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">714. 买卖股票的最佳时机含手续费</a>，这两题的代码都很简单，但都非常难想到。</p></blockquote><h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><ol start="738"><li>单调递增的数字</li></ol><pre><code class="java">class Solution &#123;    //解法一：暴力解法 很容易想到但是会超时    public int monotoneIncreasingDigits(int n) &#123;        for(int i=n;i&gt;0;i--)&#123;            if(check(i))                return i;        &#125;        return 0;    &#125;    public boolean check(int num)&#123;        int max=10;        while(num!=0)&#123;            int t=num%10;//取出最后一位元素            if(t&lt;=max)&#123;                max=t;            &#125;else&#123;                return false;            &#125;            num/=10;        &#125;        return true;    &#125;&#125;</code></pre><pre><code class="java">class Solution &#123;    /*解法二：从后往前遍历 n转化为字符数组a后 若a[i]&lt;a[i-1] 说明不是递增的 要进行调整    具体操作就是吧a[i-1]减一，以及把i以后的数字全部变成9，听起来很抽象。    如：n等于332 它的变化顺序是 332-&gt;329-&gt;299 这样经过两次调整就能得到正确结果，而且这    个算法时间复杂度是O(n).    */    public int monotoneIncreasingDigits(int n) &#123;        String s=String.valueOf(n);//转换成字符串更简单        int len=s.length();        int flag=len;        char[] a=s.toCharArray();        for(int i=len-1;i&gt;=1;i--)&#123;            if(a[i]&lt;a[i-1])&#123;                flag=i;                a[i-1]--;            &#125;        &#125;        for(int i=flag;i&lt;len;i++)&#123;            a[i]=&#39;9&#39;;        &#125;        return Integer.parseInt(new String(a));    &#125;&#125;</code></pre><ol start="714"><li><em><strong>买卖股票的最佳时机含手续费</strong></em></li></ol><pre><code class="java">class Solution &#123;    public int maxProfit(int[] prices, int fee) &#123;        int minPay=prices[0]+fee;        int sum=0;        for(int i:prices)&#123;            if(i+fee&lt;minPay)                minPay=i+fee;            else if(i&gt;minPay)&#123;                sum+=i-minPay;                minPay=i;            &#125;        &#125;        return sum;    &#125;&#125;</code></pre><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>第二个题太难想到了，我也不想写啥分析，头晕。好在是终于结束了贪心(仓促)，明天动态规划！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;这两天被贪心折磨，贪心真的很难想到，初看题目有点看不懂，好不容易推演了两个测试，明白了题目的用意，但还是无从下手。一看题解代</summary>
       
     
     
@@ -210,30 +210,6 @@
   </entry>
   
   <entry>
-    <title>刷题日记 day-2</title>
-    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/"/>
-    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/</id>
-    <published>2021-09-23T16:00:00.000Z</published>
-    <updated>2021-09-24T10:25:23.584Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一直没写主要是没啥兴趣，刷题在刚开始简直折磨，不夸张的说开始每一道题都是看答案的，有的看了答案也没弄懂，简直不知所云。对Java的集合类和数据结构也不是很熟悉，很多常用的方法函数不知道。经过20天左右的时间，我基本对刷题有一点的感觉了，开始越刷越快了。这个时候我想要慢下来，慢慢把刷的题总结一下。这就是再次写博客的理由。</p><h2 id="题目概述及解法"><a href="#题目概述及解法" class="headerlink" title="题目概述及解法"></a>题目概述及解法</h2><p>今天刷的还是回溯算法系列，这一题是：LeetCode第131题—<strong>分割回文串</strong></p><p>题目的意思是：<em>给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是 回文串 。返回 s 所有可能的分割方案。</em></p><p><em>回文串 是正着读和反着读都一样的字符串。</em></p><p>示例 1：</p><p>输入：s = “aab”<br>输出：[[“a”,”a”,”b”],[“aa”,”b”]]<br>示例 2：</p><p>输入：s = “a”<br>输出：[[“a”]]</p><p>提示：</p><p>1 &lt;= s.length &lt;= 16<br>s 仅由小写英文字母组成</p><h3 id="解法代码："><a href="#解法代码：" class="headerlink" title="解法代码："></a>解法代码：</h3><pre><code class="java">class Solution &#123;    List&lt;List&lt;String&gt;&gt; res= new ArrayList&lt;&gt;();//存放正确结果的集合    Deque&lt;String&gt; path=new LinkedList&lt;&gt;();//存放单个正确结果(这里选择双端队列，若选择list删除时会出现错误)    public List&lt;List&lt;String&gt;&gt; partition(String s) &#123;        backtracking(s,0);        return res;    &#125;    public void backtracking(String s,int index)&#123;//回溯函数(也是递归函数)        //确定回溯的终止条件(本题是： 当截取字符串的位置到达字符串最后一位就说明此次获取完成)        if(index&gt;=s.length())&#123;            res.add(new ArrayList&lt;&gt;(path));            return;        &#125;        //for循环是解空间树的横向遍历，而回溯函数是解空间树的纵向遍历        for(int i=index;i&lt;s.length();i++)&#123;            //先判断是否是回文串，是就截取放入path中，不是就跳过这次循环            if(isHuiWen(s,index,i))&#123;                String str=s.substring(index,i+1);                path.addLast(str);            &#125;else&#123;                continue;            &#125;            backtracking(s,i+1);//回溯函数(i+1是为了不再重复的截取)            path.removeLast();//回溯 撤销之前处理节点的过程        &#125;            &#125;    //下面这个函数是判断是否是回文串    public boolean isHuiWen(String s,int index,int end)&#123;        for(int i=index,j=end;i&lt;j;i++,j--)&#123;            if(s.charAt(i)!=s.charAt(j))                return false;        &#125;        return true;    &#125;&#125;</code></pre><p>解法我在代码上做了详细的注释说明，主要就是截取字符串和数据结构Deque的选择。</p><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>虽然每天写的题不只一题，但是要是全部都记录下来，有点费时间，还是每天找一个喜欢的记录，这样也挺好的。</p><p>​                                                      <em><strong>加油</strong></em></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一</summary>
-      
-    
-    
-    
-    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
-    
-    
-    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
-    
-  </entry>
-  
-  <entry>
     <title>刷题日记 day-3</title>
     <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%203/"/>
     <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%203/</id>
@@ -247,6 +223,30 @@
       
     <summary type="html">&lt;h2 id=&quot;题目概述&quot;&gt;&lt;a href=&quot;#题目概述&quot; class=&quot;headerlink&quot; title=&quot;题目概述&quot;&gt;&lt;/a&gt;题目概述&lt;/h2&gt;&lt;p&gt;LeetCode第46题：&lt;em&gt;全排列&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;给定一个不含重复数字的数组 nums ，返回其 所有可能的</summary>
+      
+    
+    
+    
+    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
+    
+    
+    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>刷题日记 day-2</title>
+    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/"/>
+    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/</id>
+    <published>2021-09-23T16:00:00.000Z</published>
+    <updated>2021-09-24T10:25:23.584Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一直没写主要是没啥兴趣，刷题在刚开始简直折磨，不夸张的说开始每一道题都是看答案的，有的看了答案也没弄懂，简直不知所云。对Java的集合类和数据结构也不是很熟悉，很多常用的方法函数不知道。经过20天左右的时间，我基本对刷题有一点的感觉了，开始越刷越快了。这个时候我想要慢下来，慢慢把刷的题总结一下。这就是再次写博客的理由。</p><h2 id="题目概述及解法"><a href="#题目概述及解法" class="headerlink" title="题目概述及解法"></a>题目概述及解法</h2><p>今天刷的还是回溯算法系列，这一题是：LeetCode第131题—<strong>分割回文串</strong></p><p>题目的意思是：<em>给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是 回文串 。返回 s 所有可能的分割方案。</em></p><p><em>回文串 是正着读和反着读都一样的字符串。</em></p><p>示例 1：</p><p>输入：s = “aab”<br>输出：[[“a”,”a”,”b”],[“aa”,”b”]]<br>示例 2：</p><p>输入：s = “a”<br>输出：[[“a”]]</p><p>提示：</p><p>1 &lt;= s.length &lt;= 16<br>s 仅由小写英文字母组成</p><h3 id="解法代码："><a href="#解法代码：" class="headerlink" title="解法代码："></a>解法代码：</h3><pre><code class="java">class Solution &#123;    List&lt;List&lt;String&gt;&gt; res= new ArrayList&lt;&gt;();//存放正确结果的集合    Deque&lt;String&gt; path=new LinkedList&lt;&gt;();//存放单个正确结果(这里选择双端队列，若选择list删除时会出现错误)    public List&lt;List&lt;String&gt;&gt; partition(String s) &#123;        backtracking(s,0);        return res;    &#125;    public void backtracking(String s,int index)&#123;//回溯函数(也是递归函数)        //确定回溯的终止条件(本题是： 当截取字符串的位置到达字符串最后一位就说明此次获取完成)        if(index&gt;=s.length())&#123;            res.add(new ArrayList&lt;&gt;(path));            return;        &#125;        //for循环是解空间树的横向遍历，而回溯函数是解空间树的纵向遍历        for(int i=index;i&lt;s.length();i++)&#123;            //先判断是否是回文串，是就截取放入path中，不是就跳过这次循环            if(isHuiWen(s,index,i))&#123;                String str=s.substring(index,i+1);                path.addLast(str);            &#125;else&#123;                continue;            &#125;            backtracking(s,i+1);//回溯函数(i+1是为了不再重复的截取)            path.removeLast();//回溯 撤销之前处理节点的过程        &#125;            &#125;    //下面这个函数是判断是否是回文串    public boolean isHuiWen(String s,int index,int end)&#123;        for(int i=index,j=end;i&lt;j;i++,j--)&#123;            if(s.charAt(i)!=s.charAt(j))                return false;        &#125;        return true;    &#125;&#125;</code></pre><p>解法我在代码上做了详细的注释说明，主要就是截取字符串和数据结构Deque的选择。</p><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>虽然每天写的题不只一题，但是要是全部都记录下来，有点费时间，还是每天找一个喜欢的记录，这样也挺好的。</p><p>​                                                      <em><strong>加油</strong></em></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一</summary>
       
     
     
