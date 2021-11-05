@@ -41,6 +41,30 @@
   </entry>
   
   <entry>
+    <title>刷题日记 day-10</title>
+    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%2010/"/>
+    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%2010/</id>
+    <published>2021-09-23T16:00:00.000Z</published>
+    <updated>2021-09-24T08:28:49.570Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>​        李奶奶的动态规划！！！真的觉得自己智商过低，不适合刷动态规划。于是我找了一个稍微简单一点的链表问题，题目来自于：**LeetCode <a href="https://leetcode-cn.com/problems/reorder-list/">143. 重排链表</a>**，这个题目的解法思路很多，我也想出来几种。但由于我对链表结构的不够熟悉，不能完美的利用链表结构特点，只能理解别人写的题解。题解的思路也很好理解：</p><ol><li>找到链表的中点分割链表</li><li>将分割后的后半部分进行链表反转</li><li>将翻转后的链表和前半部分进行合并</li></ol><p>题目的背景如下： 给定一个单链表 L 的头节点 head ，单链表 L 表示为：</p><p> L0 → L1 → … → Ln-1 → Ln<br>请将其重新排列后变为：</p><p>L0 → Ln → L1 → Ln-1 → L2 → Ln-2 → …</p><p>不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p><p>实例：</p><blockquote><p>输入: head = [1,2,3,4]<br>输出: [1,4,2,3]</p></blockquote><blockquote><p>输入: head = [1,2,3,4,5]<br>输出: [1,5,2,4,3]</p></blockquote><h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><pre><code class="java">/** * Definition for singly-linked list.         这是关于链表结构的说明 * public class ListNode &#123; *     int val; *     ListNode next; *     ListNode() &#123;&#125; *     ListNode(int val) &#123; this.val = val; &#125; *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125; * &#125; */class Solution &#123;    public void reorderList(ListNode head) &#123;        if(head.next==null||head.next.next==null)            return ;        ListNode fast=head;        ListNode slow=head;        //快慢指针 找到中点        //具体是快指针一次走两步 慢指针一次走一步 快指针走到头 慢指针走到链表中点        while(fast.next!=null&amp;&amp;fast.next.next!=null)&#123;            fast=fast.next.next;            slow=slow.next;        &#125;        ListNode newHead=slow.next;        slow.next=null;        newHead=reverse(newHead);        while(newHead!=null)&#123;            ListNode temp = newHead.next;            newHead.next = head.next;            head.next = newHead;            head = newHead.next;            newHead = temp;        &#125;    &#125;    //反转链表    public ListNode reverse(ListNode head)&#123;        ListNode pre=null;        ListNode next=null;        while(head!=null)&#123;            next = head.next;            head.next = pre;            pre = head;            head = next;        &#125;        return pre;    &#125;&#125;</code></pre><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>​        这个题目思路虽然不难想，但是实现有很多技巧，例如快慢指针、反转链表、合并链表这些小技巧，这都是阶梯模板。任重道远！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;​        李奶奶的动态规划！！！真的觉得自己智商过低，不适合刷动态规划。于是我找了一个稍微简单一点的链表问题，题目来</summary>
+      
+    
+    
+    
+    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
+    
+    
+    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
+    
+  </entry>
+  
+  <entry>
     <title>刷题日记 day-4</title>
     <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%204/"/>
     <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%204/</id>
@@ -66,18 +90,18 @@
   </entry>
   
   <entry>
-    <title>刷题日记 day-10</title>
-    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%2010/"/>
-    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%2010/</id>
+    <title>刷题日记 day-6</title>
+    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%206/"/>
+    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%206/</id>
     <published>2021-09-23T16:00:00.000Z</published>
-    <updated>2021-09-24T08:28:49.570Z</updated>
+    <updated>2021-09-24T08:29:19.641Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>​        李奶奶的动态规划！！！真的觉得自己智商过低，不适合刷动态规划。于是我找了一个稍微简单一点的链表问题，题目来自于：**LeetCode <a href="https://leetcode-cn.com/problems/reorder-list/">143. 重排链表</a>**，这个题目的解法思路很多，我也想出来几种。但由于我对链表结构的不够熟悉，不能完美的利用链表结构特点，只能理解别人写的题解。题解的思路也很好理解：</p><ol><li>找到链表的中点分割链表</li><li>将分割后的后半部分进行链表反转</li><li>将翻转后的链表和前半部分进行合并</li></ol><p>题目的背景如下： 给定一个单链表 L 的头节点 head ，单链表 L 表示为：</p><p> L0 → L1 → … → Ln-1 → Ln<br>请将其重新排列后变为：</p><p>L0 → Ln → L1 → Ln-1 → L2 → Ln-2 → …</p><p>不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p><p>实例：</p><blockquote><p>输入: head = [1,2,3,4]<br>输出: [1,4,2,3]</p></blockquote><blockquote><p>输入: head = [1,2,3,4,5]<br>输出: [1,5,2,4,3]</p></blockquote><h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><pre><code class="java">/** * Definition for singly-linked list.         这是关于链表结构的说明 * public class ListNode &#123; *     int val; *     ListNode next; *     ListNode() &#123;&#125; *     ListNode(int val) &#123; this.val = val; &#125; *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125; * &#125; */class Solution &#123;    public void reorderList(ListNode head) &#123;        if(head.next==null||head.next.next==null)            return ;        ListNode fast=head;        ListNode slow=head;        //快慢指针 找到中点        //具体是快指针一次走两步 慢指针一次走一步 快指针走到头 慢指针走到链表中点        while(fast.next!=null&amp;&amp;fast.next.next!=null)&#123;            fast=fast.next.next;            slow=slow.next;        &#125;        ListNode newHead=slow.next;        slow.next=null;        newHead=reverse(newHead);        while(newHead!=null)&#123;            ListNode temp = newHead.next;            newHead.next = head.next;            head.next = newHead;            head = newHead.next;            newHead = temp;        &#125;    &#125;    //反转链表    public ListNode reverse(ListNode head)&#123;        ListNode pre=null;        ListNode next=null;        while(head!=null)&#123;            next = head.next;            head.next = pre;            pre = head;            head = next;        &#125;        return pre;    &#125;&#125;</code></pre><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>​        这个题目思路虽然不难想，但是实现有很多技巧，例如快慢指针、反转链表、合并链表这些小技巧，这都是阶梯模板。任重道远！</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>这两天被贪心折磨，贪心真的很难想到，初看题目有点看不懂，好不容易推演了两个测试，明白了题目的用意，但还是无从下手。一看题解代码和分析，就感觉自己是个傻zi。</p><blockquote><p>今天写了两个贪心的题目，<a href="https://leetcode-cn.com/problems/monotone-increasing-digits/">738. 单调递增的数字</a>以及<a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">714. 买卖股票的最佳时机含手续费</a>，这两题的代码都很简单，但都非常难想到。</p></blockquote><h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><ol start="738"><li>单调递增的数字</li></ol><pre><code class="java">class Solution &#123;    //解法一：暴力解法 很容易想到但是会超时    public int monotoneIncreasingDigits(int n) &#123;        for(int i=n;i&gt;0;i--)&#123;            if(check(i))                return i;        &#125;        return 0;    &#125;    public boolean check(int num)&#123;        int max=10;        while(num!=0)&#123;            int t=num%10;//取出最后一位元素            if(t&lt;=max)&#123;                max=t;            &#125;else&#123;                return false;            &#125;            num/=10;        &#125;        return true;    &#125;&#125;</code></pre><pre><code class="java">class Solution &#123;    /*解法二：从后往前遍历 n转化为字符数组a后 若a[i]&lt;a[i-1] 说明不是递增的 要进行调整    具体操作就是吧a[i-1]减一，以及把i以后的数字全部变成9，听起来很抽象。    如：n等于332 它的变化顺序是 332-&gt;329-&gt;299 这样经过两次调整就能得到正确结果，而且这    个算法时间复杂度是O(n).    */    public int monotoneIncreasingDigits(int n) &#123;        String s=String.valueOf(n);//转换成字符串更简单        int len=s.length();        int flag=len;        char[] a=s.toCharArray();        for(int i=len-1;i&gt;=1;i--)&#123;            if(a[i]&lt;a[i-1])&#123;                flag=i;                a[i-1]--;            &#125;        &#125;        for(int i=flag;i&lt;len;i++)&#123;            a[i]=&#39;9&#39;;        &#125;        return Integer.parseInt(new String(a));    &#125;&#125;</code></pre><ol start="714"><li><em><strong>买卖股票的最佳时机含手续费</strong></em></li></ol><pre><code class="java">class Solution &#123;    public int maxProfit(int[] prices, int fee) &#123;        int minPay=prices[0]+fee;        int sum=0;        for(int i:prices)&#123;            if(i+fee&lt;minPay)                minPay=i+fee;            else if(i&gt;minPay)&#123;                sum+=i-minPay;                minPay=i;            &#125;        &#125;        return sum;    &#125;&#125;</code></pre><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>第二个题太难想到了，我也不想写啥分析，头晕。好在是终于结束了贪心(仓促)，明天动态规划！</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;​        李奶奶的动态规划！！！真的觉得自己智商过低，不适合刷动态规划。于是我找了一个稍微简单一点的链表问题，题目来</summary>
+    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;这两天被贪心折磨，贪心真的很难想到，初看题目有点看不懂，好不容易推演了两个测试，明白了题目的用意，但还是无从下手。一看题解代</summary>
       
     
     
@@ -102,30 +126,6 @@
       
       
     <summary type="html">&lt;h2 id=&quot;初探贪心算法&quot;&gt;&lt;a href=&quot;#初探贪心算法&quot; class=&quot;headerlink&quot; title=&quot;初探贪心算法&quot;&gt;&lt;/a&gt;初探贪心算法&lt;/h2&gt;&lt;p&gt;​        终于结束了回溯，老实说回溯是真的有点难，虽然有模板，但是很多问题的解决方式不尽相同。刷了也</summary>
-      
-    
-    
-    
-    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
-    
-    
-    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>刷题日记 day-6</title>
-    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%206/"/>
-    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%206/</id>
-    <published>2021-09-23T16:00:00.000Z</published>
-    <updated>2021-09-24T08:29:19.641Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>这两天被贪心折磨，贪心真的很难想到，初看题目有点看不懂，好不容易推演了两个测试，明白了题目的用意，但还是无从下手。一看题解代码和分析，就感觉自己是个傻zi。</p><blockquote><p>今天写了两个贪心的题目，<a href="https://leetcode-cn.com/problems/monotone-increasing-digits/">738. 单调递增的数字</a>以及<a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">714. 买卖股票的最佳时机含手续费</a>，这两题的代码都很简单，但都非常难想到。</p></blockquote><h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><ol start="738"><li>单调递增的数字</li></ol><pre><code class="java">class Solution &#123;    //解法一：暴力解法 很容易想到但是会超时    public int monotoneIncreasingDigits(int n) &#123;        for(int i=n;i&gt;0;i--)&#123;            if(check(i))                return i;        &#125;        return 0;    &#125;    public boolean check(int num)&#123;        int max=10;        while(num!=0)&#123;            int t=num%10;//取出最后一位元素            if(t&lt;=max)&#123;                max=t;            &#125;else&#123;                return false;            &#125;            num/=10;        &#125;        return true;    &#125;&#125;</code></pre><pre><code class="java">class Solution &#123;    /*解法二：从后往前遍历 n转化为字符数组a后 若a[i]&lt;a[i-1] 说明不是递增的 要进行调整    具体操作就是吧a[i-1]减一，以及把i以后的数字全部变成9，听起来很抽象。    如：n等于332 它的变化顺序是 332-&gt;329-&gt;299 这样经过两次调整就能得到正确结果，而且这    个算法时间复杂度是O(n).    */    public int monotoneIncreasingDigits(int n) &#123;        String s=String.valueOf(n);//转换成字符串更简单        int len=s.length();        int flag=len;        char[] a=s.toCharArray();        for(int i=len-1;i&gt;=1;i--)&#123;            if(a[i]&lt;a[i-1])&#123;                flag=i;                a[i-1]--;            &#125;        &#125;        for(int i=flag;i&lt;len;i++)&#123;            a[i]=&#39;9&#39;;        &#125;        return Integer.parseInt(new String(a));    &#125;&#125;</code></pre><ol start="714"><li><em><strong>买卖股票的最佳时机含手续费</strong></em></li></ol><pre><code class="java">class Solution &#123;    public int maxProfit(int[] prices, int fee) &#123;        int minPay=prices[0]+fee;        int sum=0;        for(int i:prices)&#123;            if(i+fee&lt;minPay)                minPay=i+fee;            else if(i&gt;minPay)&#123;                sum+=i-minPay;                minPay=i;            &#125;        &#125;        return sum;    &#125;&#125;</code></pre><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>第二个题太难想到了，我也不想写啥分析，头晕。好在是终于结束了贪心(仓促)，明天动态规划！</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;这两天被贪心折磨，贪心真的很难想到，初看题目有点看不懂，好不容易推演了两个测试，明白了题目的用意，但还是无从下手。一看题解代</summary>
       
     
     
@@ -186,18 +186,18 @@
   </entry>
   
   <entry>
-    <title>刷题日记 day-3</title>
-    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%209/"/>
-    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%209/</id>
+    <title>刷题日记 day-2</title>
+    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/"/>
+    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/</id>
     <published>2021-09-23T16:00:00.000Z</published>
-    <updated>2021-09-24T08:29:35.658Z</updated>
+    <updated>2021-09-24T10:25:23.584Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="初识完全背包"><a href="#初识完全背包" class="headerlink" title="初识完全背包"></a>初识完全背包</h2><p>​        完全背包是背包问题的变形之一，老实说01背包我也才半知半解，今天看题解也还是雾中看花。完全背包就是背包只有一个，但是物品可以重复放入无数次。即每种物品有无数件。</p><p>​        首先我们列出01背包的核心代码：</p><pre><code class="java">for(int i=0;i&lt;weight.length;i++)&#123;//遍历物品    for(int j=bagWeight;j&gt;=weight[i];j--)&#123;//遍历背包容量        dp[j]=Math.max(dp[j],dp[j-weight[i]]+value[i]);    &#125;&#125;</code></pre><p><em>01背包内嵌的for循环是从大到小遍历，为了保证每个物品仅被添加一次。</em></p><p>而完全背包的物品可以添加多次，所以内层循环是要从小到大：</p><pre><code class="java">for(int i=0;i&lt;weight.length;i++)&#123;//遍历物品    for(int j=weight[i];j&lt;bagWeight;j++)&#123;//遍历背包容量        dp[j]=Math.max(dp[j],dp[j-weight[i]]+value[i]);    &#125;&#125;</code></pre><h2 id="两个小题"><a href="#两个小题" class="headerlink" title="两个小题"></a>两个小题</h2><h3 id="第一题：518-零钱兑换-II"><a href="#第一题：518-零钱兑换-II" class="headerlink" title="第一题：518. 零钱兑换 II"></a>第一题：<a href="https://leetcode-cn.com/problems/coin-change-2/">518. 零钱兑换 II</a></h3><p>给你一个整数数组 coins 表示不同面额的硬币，另给一个整数 amount 表示总金额。</p><p>请你计算并返回可以凑成总金额的硬币组合数。如果任何硬币组合都无法凑出总金额，返回 0 。</p><p>假设每一种面额的硬币有无限个。 </p><p>题目数据保证结果符合 32 位带符号整数</p><blockquote><p>实例：</p><p>输入：amount = 5, coins = [1, 2, 5]<br>输出：4<br>解释：有四种方式可以凑成总金额：<br>5=5<br>5=2+2+1<br>5=2+1+1+1<br>5=1+1+1+1+1</p></blockquote><h3 id="第二题：377-组合总和-Ⅳ"><a href="#第二题：377-组合总和-Ⅳ" class="headerlink" title="第二题：377. 组合总和 Ⅳ"></a>第二题：<a href="https://leetcode-cn.com/problems/combination-sum-iv/">377. 组合总和 Ⅳ</a></h3><p>给你一个由 不同 整数组成的数组 nums ，和一个目标整数 target 。请你从 nums 中找出并返回总和为 target 的元素组合的个数。</p><p>题目数据保证答案符合 32 位整数范围。</p><blockquote><p>实例：</p><p>输入：nums = [1,2,3], target = 4<br>输出：7<br>解释：<br>所有可能的组合为：<br>(1, 1, 1, 1)<br>(1, 1, 2)<br>(1, 2, 1)<br>(1, 3)<br>(2, 1, 1)<br>(2, 2)<br>(3, 1)<br>请注意，顺序不同的序列被视作不同的组合</p></blockquote><h2 id="代码详解"><a href="#代码详解" class="headerlink" title="代码详解"></a>代码详解</h2><h3 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h3><pre><code class="java">class Solution &#123;    public int change(int amount, int[] coins) &#123;        int[] dp=new int[amount+1];        dp[0]=1;        for(int i=0;i&lt;coins.length;i++)&#123;//遍历物品            for(int j=coins[i];j&lt;=amount;j++)&#123;//遍历背包                dp[j]+=dp[j-coins[i]];            &#125;        &#125;        return dp[amount];    &#125;&#125;</code></pre><h3 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h3><pre><code class="java">class Solution &#123;    public int combinationSum4(int[] nums, int target) &#123;        int[] dp=new int[target+1];        dp[0]=1;        for(int i=0;i&lt;=target;i++)&#123;//遍历背包            for(int j=0;j&lt;nums.length;j++)&#123;//遍历物品                if(i-nums[j]&gt;=0)&#123;                    dp[i]+=dp[i-nums[j]];                &#125;            &#125;        &#125;        return dp[target];    &#125;&#125;</code></pre><h2 id="分析与小结"><a href="#分析与小结" class="headerlink" title="分析与小结"></a>分析与小结</h2><p>这个完全背包，这里有两种类型：组合和排列。</p><p>从代码可以看出来：组合问题for循环是先遍历物品，再遍历背包，而排列问题for循环先遍历背包，再遍历物品。</p><p>全是套路呀！</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一直没写主要是没啥兴趣，刷题在刚开始简直折磨，不夸张的说开始每一道题都是看答案的，有的看了答案也没弄懂，简直不知所云。对Java的集合类和数据结构也不是很熟悉，很多常用的方法函数不知道。经过20天左右的时间，我基本对刷题有一点的感觉了，开始越刷越快了。这个时候我想要慢下来，慢慢把刷的题总结一下。这就是再次写博客的理由。</p><h2 id="题目概述及解法"><a href="#题目概述及解法" class="headerlink" title="题目概述及解法"></a>题目概述及解法</h2><p>今天刷的还是回溯算法系列，这一题是：LeetCode第131题—<strong>分割回文串</strong></p><p>题目的意思是：<em>给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是 回文串 。返回 s 所有可能的分割方案。</em></p><p><em>回文串 是正着读和反着读都一样的字符串。</em></p><p>示例 1：</p><p>输入：s = “aab”<br>输出：[[“a”,”a”,”b”],[“aa”,”b”]]<br>示例 2：</p><p>输入：s = “a”<br>输出：[[“a”]]</p><p>提示：</p><p>1 &lt;= s.length &lt;= 16<br>s 仅由小写英文字母组成</p><h3 id="解法代码："><a href="#解法代码：" class="headerlink" title="解法代码："></a>解法代码：</h3><pre><code class="java">class Solution &#123;    List&lt;List&lt;String&gt;&gt; res= new ArrayList&lt;&gt;();//存放正确结果的集合    Deque&lt;String&gt; path=new LinkedList&lt;&gt;();//存放单个正确结果(这里选择双端队列，若选择list删除时会出现错误)    public List&lt;List&lt;String&gt;&gt; partition(String s) &#123;        backtracking(s,0);        return res;    &#125;    public void backtracking(String s,int index)&#123;//回溯函数(也是递归函数)        //确定回溯的终止条件(本题是： 当截取字符串的位置到达字符串最后一位就说明此次获取完成)        if(index&gt;=s.length())&#123;            res.add(new ArrayList&lt;&gt;(path));            return;        &#125;        //for循环是解空间树的横向遍历，而回溯函数是解空间树的纵向遍历        for(int i=index;i&lt;s.length();i++)&#123;            //先判断是否是回文串，是就截取放入path中，不是就跳过这次循环            if(isHuiWen(s,index,i))&#123;                String str=s.substring(index,i+1);                path.addLast(str);            &#125;else&#123;                continue;            &#125;            backtracking(s,i+1);//回溯函数(i+1是为了不再重复的截取)            path.removeLast();//回溯 撤销之前处理节点的过程        &#125;            &#125;    //下面这个函数是判断是否是回文串    public boolean isHuiWen(String s,int index,int end)&#123;        for(int i=index,j=end;i&lt;j;i++,j--)&#123;            if(s.charAt(i)!=s.charAt(j))                return false;        &#125;        return true;    &#125;&#125;</code></pre><p>解法我在代码上做了详细的注释说明，主要就是截取字符串和数据结构Deque的选择。</p><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>虽然每天写的题不只一题，但是要是全部都记录下来，有点费时间，还是每天找一个喜欢的记录，这样也挺好的。</p><p>​                                                      <em><strong>加油</strong></em></p>]]></content>
     
     
       
       
-    <summary type="html">&lt;h2 id=&quot;初识完全背包&quot;&gt;&lt;a href=&quot;#初识完全背包&quot; class=&quot;headerlink&quot; title=&quot;初识完全背包&quot;&gt;&lt;/a&gt;初识完全背包&lt;/h2&gt;&lt;p&gt;​        完全背包是背包问题的变形之一，老实说01背包我也才半知半解，今天看题解也还是雾中看花。完全</summary>
+    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一</summary>
       
     
     
@@ -235,6 +235,30 @@
   </entry>
   
   <entry>
+    <title>刷题日记 day-3</title>
+    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%209/"/>
+    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%209/</id>
+    <published>2021-09-23T16:00:00.000Z</published>
+    <updated>2021-09-24T08:29:35.658Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="初识完全背包"><a href="#初识完全背包" class="headerlink" title="初识完全背包"></a>初识完全背包</h2><p>​        完全背包是背包问题的变形之一，老实说01背包我也才半知半解，今天看题解也还是雾中看花。完全背包就是背包只有一个，但是物品可以重复放入无数次。即每种物品有无数件。</p><p>​        首先我们列出01背包的核心代码：</p><pre><code class="java">for(int i=0;i&lt;weight.length;i++)&#123;//遍历物品    for(int j=bagWeight;j&gt;=weight[i];j--)&#123;//遍历背包容量        dp[j]=Math.max(dp[j],dp[j-weight[i]]+value[i]);    &#125;&#125;</code></pre><p><em>01背包内嵌的for循环是从大到小遍历，为了保证每个物品仅被添加一次。</em></p><p>而完全背包的物品可以添加多次，所以内层循环是要从小到大：</p><pre><code class="java">for(int i=0;i&lt;weight.length;i++)&#123;//遍历物品    for(int j=weight[i];j&lt;bagWeight;j++)&#123;//遍历背包容量        dp[j]=Math.max(dp[j],dp[j-weight[i]]+value[i]);    &#125;&#125;</code></pre><h2 id="两个小题"><a href="#两个小题" class="headerlink" title="两个小题"></a>两个小题</h2><h3 id="第一题：518-零钱兑换-II"><a href="#第一题：518-零钱兑换-II" class="headerlink" title="第一题：518. 零钱兑换 II"></a>第一题：<a href="https://leetcode-cn.com/problems/coin-change-2/">518. 零钱兑换 II</a></h3><p>给你一个整数数组 coins 表示不同面额的硬币，另给一个整数 amount 表示总金额。</p><p>请你计算并返回可以凑成总金额的硬币组合数。如果任何硬币组合都无法凑出总金额，返回 0 。</p><p>假设每一种面额的硬币有无限个。 </p><p>题目数据保证结果符合 32 位带符号整数</p><blockquote><p>实例：</p><p>输入：amount = 5, coins = [1, 2, 5]<br>输出：4<br>解释：有四种方式可以凑成总金额：<br>5=5<br>5=2+2+1<br>5=2+1+1+1<br>5=1+1+1+1+1</p></blockquote><h3 id="第二题：377-组合总和-Ⅳ"><a href="#第二题：377-组合总和-Ⅳ" class="headerlink" title="第二题：377. 组合总和 Ⅳ"></a>第二题：<a href="https://leetcode-cn.com/problems/combination-sum-iv/">377. 组合总和 Ⅳ</a></h3><p>给你一个由 不同 整数组成的数组 nums ，和一个目标整数 target 。请你从 nums 中找出并返回总和为 target 的元素组合的个数。</p><p>题目数据保证答案符合 32 位整数范围。</p><blockquote><p>实例：</p><p>输入：nums = [1,2,3], target = 4<br>输出：7<br>解释：<br>所有可能的组合为：<br>(1, 1, 1, 1)<br>(1, 1, 2)<br>(1, 2, 1)<br>(1, 3)<br>(2, 1, 1)<br>(2, 2)<br>(3, 1)<br>请注意，顺序不同的序列被视作不同的组合</p></blockquote><h2 id="代码详解"><a href="#代码详解" class="headerlink" title="代码详解"></a>代码详解</h2><h3 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h3><pre><code class="java">class Solution &#123;    public int change(int amount, int[] coins) &#123;        int[] dp=new int[amount+1];        dp[0]=1;        for(int i=0;i&lt;coins.length;i++)&#123;//遍历物品            for(int j=coins[i];j&lt;=amount;j++)&#123;//遍历背包                dp[j]+=dp[j-coins[i]];            &#125;        &#125;        return dp[amount];    &#125;&#125;</code></pre><h3 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h3><pre><code class="java">class Solution &#123;    public int combinationSum4(int[] nums, int target) &#123;        int[] dp=new int[target+1];        dp[0]=1;        for(int i=0;i&lt;=target;i++)&#123;//遍历背包            for(int j=0;j&lt;nums.length;j++)&#123;//遍历物品                if(i-nums[j]&gt;=0)&#123;                    dp[i]+=dp[i-nums[j]];                &#125;            &#125;        &#125;        return dp[target];    &#125;&#125;</code></pre><h2 id="分析与小结"><a href="#分析与小结" class="headerlink" title="分析与小结"></a>分析与小结</h2><p>这个完全背包，这里有两种类型：组合和排列。</p><p>从代码可以看出来：组合问题for循环是先遍历物品，再遍历背包，而排列问题for循环先遍历背包，再遍历物品。</p><p>全是套路呀！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;初识完全背包&quot;&gt;&lt;a href=&quot;#初识完全背包&quot; class=&quot;headerlink&quot; title=&quot;初识完全背包&quot;&gt;&lt;/a&gt;初识完全背包&lt;/h2&gt;&lt;p&gt;​        完全背包是背包问题的变形之一，老实说01背包我也才半知半解，今天看题解也还是雾中看花。完全</summary>
+      
+    
+    
+    
+    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
+    
+    
+    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
+    
+  </entry>
+  
+  <entry>
     <title>标签测试</title>
     <link href="http://example.com/2021/09/24/%E6%A0%87%E7%AD%BE%E6%B5%8B%E8%AF%95/"/>
     <id>http://example.com/2021/09/24/%E6%A0%87%E7%AD%BE%E6%B5%8B%E8%AF%95/</id>
@@ -255,30 +279,6 @@
     
     
     <category term="随笔" scheme="http://example.com/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>刷题日记 day-2</title>
-    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/"/>
-    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/</id>
-    <published>2021-09-23T16:00:00.000Z</published>
-    <updated>2021-09-24T10:25:23.584Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一直没写主要是没啥兴趣，刷题在刚开始简直折磨，不夸张的说开始每一道题都是看答案的，有的看了答案也没弄懂，简直不知所云。对Java的集合类和数据结构也不是很熟悉，很多常用的方法函数不知道。经过20天左右的时间，我基本对刷题有一点的感觉了，开始越刷越快了。这个时候我想要慢下来，慢慢把刷的题总结一下。这就是再次写博客的理由。</p><h2 id="题目概述及解法"><a href="#题目概述及解法" class="headerlink" title="题目概述及解法"></a>题目概述及解法</h2><p>今天刷的还是回溯算法系列，这一题是：LeetCode第131题—<strong>分割回文串</strong></p><p>题目的意思是：<em>给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是 回文串 。返回 s 所有可能的分割方案。</em></p><p><em>回文串 是正着读和反着读都一样的字符串。</em></p><p>示例 1：</p><p>输入：s = “aab”<br>输出：[[“a”,”a”,”b”],[“aa”,”b”]]<br>示例 2：</p><p>输入：s = “a”<br>输出：[[“a”]]</p><p>提示：</p><p>1 &lt;= s.length &lt;= 16<br>s 仅由小写英文字母组成</p><h3 id="解法代码："><a href="#解法代码：" class="headerlink" title="解法代码："></a>解法代码：</h3><pre><code class="java">class Solution &#123;    List&lt;List&lt;String&gt;&gt; res= new ArrayList&lt;&gt;();//存放正确结果的集合    Deque&lt;String&gt; path=new LinkedList&lt;&gt;();//存放单个正确结果(这里选择双端队列，若选择list删除时会出现错误)    public List&lt;List&lt;String&gt;&gt; partition(String s) &#123;        backtracking(s,0);        return res;    &#125;    public void backtracking(String s,int index)&#123;//回溯函数(也是递归函数)        //确定回溯的终止条件(本题是： 当截取字符串的位置到达字符串最后一位就说明此次获取完成)        if(index&gt;=s.length())&#123;            res.add(new ArrayList&lt;&gt;(path));            return;        &#125;        //for循环是解空间树的横向遍历，而回溯函数是解空间树的纵向遍历        for(int i=index;i&lt;s.length();i++)&#123;            //先判断是否是回文串，是就截取放入path中，不是就跳过这次循环            if(isHuiWen(s,index,i))&#123;                String str=s.substring(index,i+1);                path.addLast(str);            &#125;else&#123;                continue;            &#125;            backtracking(s,i+1);//回溯函数(i+1是为了不再重复的截取)            path.removeLast();//回溯 撤销之前处理节点的过程        &#125;            &#125;    //下面这个函数是判断是否是回文串    public boolean isHuiWen(String s,int index,int end)&#123;        for(int i=index,j=end;i&lt;j;i++,j--)&#123;            if(s.charAt(i)!=s.charAt(j))                return false;        &#125;        return true;    &#125;&#125;</code></pre><p>解法我在代码上做了详细的注释说明，主要就是截取字符串和数据结构Deque的选择。</p><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>虽然每天写的题不只一题，但是要是全部都记录下来，有点费时间，还是每天找一个喜欢的记录，这样也挺好的。</p><p>​                                                      <em><strong>加油</strong></em></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一</summary>
-      
-    
-    
-    
-    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
-    
-    
-    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
     
   </entry>
   
