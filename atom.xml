@@ -186,30 +186,6 @@
   </entry>
   
   <entry>
-    <title>刷题日记 day-2</title>
-    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/"/>
-    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/</id>
-    <published>2021-09-23T16:00:00.000Z</published>
-    <updated>2021-09-24T10:25:23.584Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一直没写主要是没啥兴趣，刷题在刚开始简直折磨，不夸张的说开始每一道题都是看答案的，有的看了答案也没弄懂，简直不知所云。对Java的集合类和数据结构也不是很熟悉，很多常用的方法函数不知道。经过20天左右的时间，我基本对刷题有一点的感觉了，开始越刷越快了。这个时候我想要慢下来，慢慢把刷的题总结一下。这就是再次写博客的理由。</p><h2 id="题目概述及解法"><a href="#题目概述及解法" class="headerlink" title="题目概述及解法"></a>题目概述及解法</h2><p>今天刷的还是回溯算法系列，这一题是：LeetCode第131题—<strong>分割回文串</strong></p><p>题目的意思是：<em>给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是 回文串 。返回 s 所有可能的分割方案。</em></p><p><em>回文串 是正着读和反着读都一样的字符串。</em></p><p>示例 1：</p><p>输入：s = “aab”<br>输出：[[“a”,”a”,”b”],[“aa”,”b”]]<br>示例 2：</p><p>输入：s = “a”<br>输出：[[“a”]]</p><p>提示：</p><p>1 &lt;= s.length &lt;= 16<br>s 仅由小写英文字母组成</p><h3 id="解法代码："><a href="#解法代码：" class="headerlink" title="解法代码："></a>解法代码：</h3><pre><code class="java">class Solution &#123;    List&lt;List&lt;String&gt;&gt; res= new ArrayList&lt;&gt;();//存放正确结果的集合    Deque&lt;String&gt; path=new LinkedList&lt;&gt;();//存放单个正确结果(这里选择双端队列，若选择list删除时会出现错误)    public List&lt;List&lt;String&gt;&gt; partition(String s) &#123;        backtracking(s,0);        return res;    &#125;    public void backtracking(String s,int index)&#123;//回溯函数(也是递归函数)        //确定回溯的终止条件(本题是： 当截取字符串的位置到达字符串最后一位就说明此次获取完成)        if(index&gt;=s.length())&#123;            res.add(new ArrayList&lt;&gt;(path));            return;        &#125;        //for循环是解空间树的横向遍历，而回溯函数是解空间树的纵向遍历        for(int i=index;i&lt;s.length();i++)&#123;            //先判断是否是回文串，是就截取放入path中，不是就跳过这次循环            if(isHuiWen(s,index,i))&#123;                String str=s.substring(index,i+1);                path.addLast(str);            &#125;else&#123;                continue;            &#125;            backtracking(s,i+1);//回溯函数(i+1是为了不再重复的截取)            path.removeLast();//回溯 撤销之前处理节点的过程        &#125;            &#125;    //下面这个函数是判断是否是回文串    public boolean isHuiWen(String s,int index,int end)&#123;        for(int i=index,j=end;i&lt;j;i++,j--)&#123;            if(s.charAt(i)!=s.charAt(j))                return false;        &#125;        return true;    &#125;&#125;</code></pre><p>解法我在代码上做了详细的注释说明，主要就是截取字符串和数据结构Deque的选择。</p><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>虽然每天写的题不只一题，但是要是全部都记录下来，有点费时间，还是每天找一个喜欢的记录，这样也挺好的。</p><p>​                                                      <em><strong>加油</strong></em></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一</summary>
-      
-    
-    
-    
-    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
-    
-    
-    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
-    
-  </entry>
-  
-  <entry>
     <title>刷题日记 day-3</title>
     <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%209/"/>
     <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%209/</id>
@@ -222,6 +198,30 @@
       
       
     <summary type="html">&lt;h2 id=&quot;初识完全背包&quot;&gt;&lt;a href=&quot;#初识完全背包&quot; class=&quot;headerlink&quot; title=&quot;初识完全背包&quot;&gt;&lt;/a&gt;初识完全背包&lt;/h2&gt;&lt;p&gt;​        完全背包是背包问题的变形之一，老实说01背包我也才半知半解，今天看题解也还是雾中看花。完全</summary>
+      
+    
+    
+    
+    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
+    
+    
+    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>刷题日记 day-2</title>
+    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/"/>
+    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/</id>
+    <published>2021-09-23T16:00:00.000Z</published>
+    <updated>2021-09-24T10:25:23.584Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一直没写主要是没啥兴趣，刷题在刚开始简直折磨，不夸张的说开始每一道题都是看答案的，有的看了答案也没弄懂，简直不知所云。对Java的集合类和数据结构也不是很熟悉，很多常用的方法函数不知道。经过20天左右的时间，我基本对刷题有一点的感觉了，开始越刷越快了。这个时候我想要慢下来，慢慢把刷的题总结一下。这就是再次写博客的理由。</p><h2 id="题目概述及解法"><a href="#题目概述及解法" class="headerlink" title="题目概述及解法"></a>题目概述及解法</h2><p>今天刷的还是回溯算法系列，这一题是：LeetCode第131题—<strong>分割回文串</strong></p><p>题目的意思是：<em>给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是 回文串 。返回 s 所有可能的分割方案。</em></p><p><em>回文串 是正着读和反着读都一样的字符串。</em></p><p>示例 1：</p><p>输入：s = “aab”<br>输出：[[“a”,”a”,”b”],[“aa”,”b”]]<br>示例 2：</p><p>输入：s = “a”<br>输出：[[“a”]]</p><p>提示：</p><p>1 &lt;= s.length &lt;= 16<br>s 仅由小写英文字母组成</p><h3 id="解法代码："><a href="#解法代码：" class="headerlink" title="解法代码："></a>解法代码：</h3><pre><code class="java">class Solution &#123;    List&lt;List&lt;String&gt;&gt; res= new ArrayList&lt;&gt;();//存放正确结果的集合    Deque&lt;String&gt; path=new LinkedList&lt;&gt;();//存放单个正确结果(这里选择双端队列，若选择list删除时会出现错误)    public List&lt;List&lt;String&gt;&gt; partition(String s) &#123;        backtracking(s,0);        return res;    &#125;    public void backtracking(String s,int index)&#123;//回溯函数(也是递归函数)        //确定回溯的终止条件(本题是： 当截取字符串的位置到达字符串最后一位就说明此次获取完成)        if(index&gt;=s.length())&#123;            res.add(new ArrayList&lt;&gt;(path));            return;        &#125;        //for循环是解空间树的横向遍历，而回溯函数是解空间树的纵向遍历        for(int i=index;i&lt;s.length();i++)&#123;            //先判断是否是回文串，是就截取放入path中，不是就跳过这次循环            if(isHuiWen(s,index,i))&#123;                String str=s.substring(index,i+1);                path.addLast(str);            &#125;else&#123;                continue;            &#125;            backtracking(s,i+1);//回溯函数(i+1是为了不再重复的截取)            path.removeLast();//回溯 撤销之前处理节点的过程        &#125;            &#125;    //下面这个函数是判断是否是回文串    public boolean isHuiWen(String s,int index,int end)&#123;        for(int i=index,j=end;i&lt;j;i++,j--)&#123;            if(s.charAt(i)!=s.charAt(j))                return false;        &#125;        return true;    &#125;&#125;</code></pre><p>解法我在代码上做了详细的注释说明，主要就是截取字符串和数据结构Deque的选择。</p><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>虽然每天写的题不只一题，但是要是全部都记录下来，有点费时间，还是每天找一个喜欢的记录，这样也挺好的。</p><p>​                                                      <em><strong>加油</strong></em></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一</summary>
       
     
     
