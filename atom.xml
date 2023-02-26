@@ -41,11 +41,11 @@
   </entry>
   
   <entry>
-    <title>数据结构复习</title>
+    <title>C语言复习</title>
     <link href="http://example.com/2022/03/23/C%E8%AF%AD%E8%A8%80%E5%A4%8D%E4%B9%A0/"/>
     <id>http://example.com/2022/03/23/C%E8%AF%AD%E8%A8%80%E5%A4%8D%E4%B9%A0/</id>
     <published>2022-03-22T16:00:00.000Z</published>
-    <updated>2023-02-26T13:21:34.193Z</updated>
+    <updated>2023-02-26T13:23:46.834Z</updated>
     
     <content type="html"><![CDATA[<h3 id="重点问题"><a href="#重点问题" class="headerlink" title="重点问题"></a>重点问题</h3><ul><li><p><strong>c和c++的区别</strong>？</p><p>首先c语言是面向过程的语言，而c++是面向对象的语言</p><p>编写c语言程序就是分析解决问题的步骤，之后一步步实现这些步骤，这些步骤写成函数，依次调用即可。而使用c++编写程序的思路是把问题拆分成各个对象，描述对象在解决问题时的行为</p><p>具体语言的区别体现在几个方面：</p><ul><li>关键字个数不同，c是37个，c++是63个</li><li>返回值不同，c语言默认返回int类型的值，c++若没有返回值类型必须定义为void</li><li>c语言没有重载函数，c++的函数重载允许声明同名函数但形参的顺序或返回值可以不同</li></ul><p>其代表的面向对象和面向过程的优缺点：</p><ul><li>面向过程是：性能高，但是开销大，消耗资源，不易于维护和拓展</li><li>面向对象是：性能低，但是易于维护和扩展，编程灵活，可以设计出低耦合的系统</li></ul></li><li><p><strong>描述一下gcc编译过程</strong></p><p>一共有四步：<strong>预处理、编译、汇编、链接</strong></p><ul><li>预处理：<strong>头文件包含、宏替换、条件编译、注释删除</strong></li><li>编译：主要进行语法、词法、语义分析，将<strong>预处理好的文件编译成汇编文件</strong></li><li>汇编：将汇编文件转换成<strong>二进制目标文件</strong></li><li>链接：将二进制文件加上所需的库以及启动代码连接成<strong>可执行文件</strong></li></ul></li><li><p><strong>什么是预编译</strong>：</p><p>预编译又称预处理，是编译过程中最先做的事，<strong>主要处理#开头的指令</strong>，比如拷贝#include的代码，替换宏定义#define</p></li><li><p><strong>传值、传地址和引用的区别</strong></p><ul><li><p>传值：会重新分配空间给形参，把实参的值拷贝给形参，形参的修改不会改变实参的值，函数调用结束后，形参就被释放</p></li><li><p>传地址：在这种传递过程中，形参是指针类型的变量，实参是变量的地址，被调用函数中对形参指针所指向的地址中内容的任何改变都会影响到实参</p></li><li><p>引用：引用和原变量是同一个东西，只不过是原变量的一个别名。在被调用函数中，对引用变量的所有操作等价于对实参的操作。这样，整个函数执行完毕后，原先的实参的值将会发生改变。</p><p><strong>传递引用</strong>给函数与<strong>传递指针</strong>的效果是一样的</p></li></ul></li><li><p><strong>关键字static的作用？</strong></p><ul><li>用于局部变量的修饰符；当 static 用于修饰局部变量时，通常是在某个函数体内，只能在该函数内被调用。这样定义的变量通常被称为<strong>局部静态变量</strong>，<strong>它的值不会因为函数调用的结束而被清除，当函数再次被调用时，它的值是上一次调用结束后的值。</strong></li><li>用于全局变量的修饰符；静态全局变量的存储位置、初始化操作同静态局部变量的特性，但其作用域有所不同：<strong>静态全局变量可以被该文件内的所有函数访问，但不能被其它文件内的函数访问</strong>。</li><li>用于函数的修饰符。<strong>静态函数的作用域仅限于本文件，不能被其它文件调用。</strong></li></ul></li><li><p><strong>结构体和类的区别是什么？</strong></p><ul><li>结构体是存放很多数据的结构，里面不含有对数据的操作，而类里面可以封装对数据的操作</li><li>类对成员变量有访问权限，结构体没有，结构体外可以任意访问结构体内的成员，但类外的不能访问定义为private成员</li><li>结构体在堆栈中创建是值类型，而类是引用类型</li></ul></li><li><p><strong>break和continue的区别？</strong></p><ul><li>break是终止整个循环过程，不再判断循环条件是否成立</li><li>continue是结束本次循环过程，且continue只能在循环语句中使用，break在Switch语句可以使用</li></ul></li><li><p><strong>C语言运算符的优先级</strong></p><p>简单记就是：！ &gt; 算术运算符 &gt; 关系运算符 &gt; &amp;&amp; &gt; || &gt; 赋值运算符</p><table><thead><tr><th align="center">优先级</th><th>运算符</th><th>名称或含义</th><th>使用形式</th><th>结合方向</th><th>说明</th></tr></thead><tbody><tr><td align="center">1</td><td>[]</td><td>数组下标</td><td>数组名[常量表达式]</td><td>左到右</td><td>–</td></tr><tr><td align="center">()</td><td>圆括号</td><td>(表达式）/函数名(形参表)</td><td>–</td><td></td><td></td></tr><tr><td align="center">.</td><td>成员选择（对象）</td><td>对象.成员名</td><td>–</td><td></td><td></td></tr><tr><td align="center">-&gt;</td><td>成员选择（指针）</td><td>对象指针-&gt;成员名</td><td>–</td><td></td><td></td></tr><tr><td align="center">2</td><td>-</td><td>负号运算符</td><td>-表达式</td><td>右到左</td><td>单目运算符</td></tr><tr><td align="center">~</td><td>按位取反运算符</td><td>~表达式</td><td></td><td></td><td></td></tr><tr><td align="center">++</td><td>自增运算符</td><td>++变量名/变量名++</td><td></td><td></td><td></td></tr><tr><td align="center">–</td><td>自减运算符</td><td>–变量名/变量名–</td><td></td><td></td><td></td></tr><tr><td align="center">*</td><td>取值运算符</td><td>*指针变量</td><td></td><td></td><td></td></tr><tr><td align="center">&amp;</td><td>取地址运算符</td><td>&amp;变量名</td><td></td><td></td><td></td></tr><tr><td align="center">!</td><td>逻辑非运算符</td><td>!表达式</td><td></td><td></td><td></td></tr><tr><td align="center">(类型)</td><td>强制类型转换</td><td>(数据类型)表达式</td><td>–</td><td></td><td></td></tr><tr><td align="center">sizeof</td><td>长度运算符</td><td>sizeof(表达式)</td><td>–</td><td></td><td></td></tr><tr><td align="center">3</td><td>/</td><td>除</td><td>表达式/表达式</td><td>左到右</td><td>双目运算符</td></tr><tr><td align="center">*</td><td>乘</td><td>表达式*表达式</td><td></td><td></td><td></td></tr><tr><td align="center">%</td><td>余数（取模）</td><td>整型表达式%整型表达式</td><td></td><td></td><td></td></tr><tr><td align="center">4</td><td>+</td><td>加</td><td>表达式+表达式</td><td>左到右</td><td>双目运算符</td></tr><tr><td align="center">-</td><td>减</td><td>表达式-表达式</td><td></td><td></td><td></td></tr><tr><td align="center">5</td><td>&lt;&lt;</td><td>左移</td><td>变量&lt;&lt;表达式</td><td>左到右</td><td>双目运算符</td></tr><tr><td align="center">&gt;&gt;</td><td>右移</td><td>变量&gt;&gt;表达式</td><td></td><td></td><td></td></tr><tr><td align="center">6</td><td>&gt;</td><td>大于</td><td>表达式&gt;表达式</td><td>左到右</td><td>双目运算符</td></tr><tr><td align="center">&gt;=</td><td>大于等于</td><td>表达式&gt;=表达式</td><td></td><td></td><td></td></tr><tr><td align="center">&lt;</td><td>小于</td><td>表达式&lt;表达式</td><td></td><td></td><td></td></tr><tr><td align="center">&lt;=</td><td>小于等于</td><td>表达式&lt;=表达式</td><td></td><td></td><td></td></tr><tr><td align="center">7</td><td>==</td><td>等于</td><td>表达式==表达式</td><td>左到右</td><td>双目运算符</td></tr><tr><td align="center">！=</td><td>不等于</td><td>表达式!= 表达式</td><td></td><td></td><td></td></tr><tr><td align="center">8</td><td>&amp;</td><td>按位与</td><td>表达式&amp;表达式</td><td>左到右</td><td>双目运算符</td></tr><tr><td align="center">9</td><td>^</td><td>按位异或</td><td>表达式^表达式</td><td>左到右</td><td>双目运算符</td></tr><tr><td align="center">10</td><td>|</td><td>按位或</td><td>表达式|表达式</td><td>左到右</td><td>双目运算符</td></tr><tr><td align="center">11</td><td>&amp;&amp;</td><td>逻辑与</td><td>表达式&amp;&amp;表达式</td><td>左到右</td><td>双目运算符</td></tr><tr><td align="center">12</td><td>||</td><td>逻辑或</td><td>表达式||表达式</td><td>左到右</td><td>双目运算符</td></tr><tr><td align="center">13</td><td>?:</td><td>条件运算符</td><td>表达式1?表达式2: 表达式3</td><td>右到左</td><td>三目运算符</td></tr><tr><td align="center">14</td><td>=</td><td>赋值运算符</td><td>变量=表达式</td><td>右到左</td><td>–</td></tr><tr><td align="center">/=</td><td>除后赋值</td><td>变量/=表达式</td><td>–</td><td></td><td></td></tr><tr><td align="center">*=</td><td>乘后赋值</td><td>变量*=表达式</td><td>–</td><td></td><td></td></tr><tr><td align="center">%=</td><td>取模后赋值</td><td>变量%=表达式</td><td>–</td><td></td><td></td></tr><tr><td align="center">+=</td><td>加后赋值</td><td>变量+=表达式</td><td>–</td><td></td><td></td></tr><tr><td align="center">-=</td><td>减后赋值</td><td>变量-=表达式</td><td>–</td><td></td><td></td></tr><tr><td align="center">&lt;&lt;=</td><td>左移后赋值</td><td>变量&lt;&lt;=表达式</td><td>–</td><td></td><td></td></tr><tr><td align="center">&gt;&gt;=</td><td>右移后赋值</td><td>变量&gt;&gt;=表达式</td><td>–</td><td></td><td></td></tr><tr><td align="center">&amp;=</td><td>按位与后赋值</td><td>变量&amp;=表达式</td><td>–</td><td></td><td></td></tr><tr><td align="center">^=</td><td>按位异或后赋值</td><td>变量^=表达式</td><td>–</td><td></td><td></td></tr><tr><td align="center">|=</td><td>按位或后赋值</td><td>变量|=表达式</td><td>–</td><td></td><td></td></tr><tr><td align="center">15</td><td>，</td><td>逗号运算符</td><td>表达式,表达式,…</td><td>左到右</td><td>–</td></tr></tbody></table></li><li><p><strong>C语言的内存分配</strong></p><p>在C语言中，定义了4个内存区间：<strong>代码区；全局变量与静态变量区；局部变量区即栈区；动态存储区，即堆区。</strong>下面分别对这4个区进行介绍。<br>① 代码区。代码区中主要存放程序中的代码，属性是只读的。<br>② 全局变量与静态变量区。也称为<strong>静态存储区域</strong>。内存在程序编译的时候就已经分配好，这块内存在程序的整个运行期间都存在。例如：<strong>全局变量、静态变量和字符串常量</strong>。分配在这个区域中的变量，当程序结束时，才释放内存。因此，经常利用这样的变量，在函数间传递信息。<br>③ 栈区。在栈上创建。在执行函数时，<strong>函数内局部变量的存储单元都可以在栈上创建</strong>，函数执行结束时这些存储单元自动被释放。栈内存分配运算内置于处理器的指令集中，效率很高，但是分配的内存容量有限。在linux系统中，通过命令“ulimit –s”，可以看到，栈的容量为8192kbytes，即8M。<br> 这种内存方式，变量内存的分配和释放都自动进行，程序员不需要考虑内存管理的问题，很方便使用。但缺点是，栈的容量有限制，且当相应的范围结束时，局部变量就不能在使用。<br>④ 堆区。有些操作对象<strong>只有在程序运行时才能确定</strong>，这样编译器在编译时就无法为他们预先分配空间，只能在程序运行时分配，所以称为<strong>动态分配</strong>。</p></li><li><p><strong>C语言里面main函数有什么参数？分别有什么作用？</strong></p><p>第一个参数 argc ，用于存放命令行参数的个数。<br>第二个参数 argv，是个字符指针的数组，每个元素都是一个字符指针，指向一个字符串，即命令行中的每一个参数。<br>第三个参数 envp ,也是一个字符指针的数组，这个数组的每一个元素是指向一个环境变量的字符指针。</p></li><li><p><strong>任何类型的指针变量都是占用4个字节</strong></p><p>指针即为地址，指针几个字节跟语言无关，而是<strong>跟系统的寻址能力有关</strong>，譬如以前是16为地址，指针即为2个字节，现在一般是32位系统，所以是4个字节，以后64位，则就为8个字节</p></li><li><p><strong>函数指针和回调函数</strong>：</p><pre><code class="c">#include &lt;stdio.h&gt; int max(int x, int y)&#123;    return x &gt; y ? x : y;&#125; int main(void)&#123;    /* p 是函数指针 */    int (* p)(int, int) = &amp; max; // &amp;可以省略    int a, b, c, d;     printf(&quot;请输入三个数字:&quot;);    scanf(&quot;%d %d %d&quot;, &amp; a, &amp; b, &amp; c);     /* 与直接调用函数等价，d = max(max(a, b), c) */    d = p(p(a, b), c);      printf(&quot;最大的数字是: %d\n&quot;, d);     return 0;&#125;</code></pre><p>函数指针作为某个函数的参数<br>函数指针变量可以作为某个函数的参数来使用的，回调函数就是一个通过函数指针调用的函数。</p></li></ul><ul><li><p><strong>typedef和#define的区别</strong></p><ul><li>typedef是一种声明自定义数据类型的关键字，在编译阶段有效，故可以进行类型检查</li><li>#define是预处理指令，发生在编译之前，只进行替换而不做检查</li></ul></li></ul>]]></content>
     
@@ -140,30 +140,6 @@
   </entry>
   
   <entry>
-    <title>刷题日记 day-6</title>
-    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%206/"/>
-    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%206/</id>
-    <published>2021-09-23T16:00:00.000Z</published>
-    <updated>2021-09-24T08:29:19.641Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>这两天被贪心折磨，贪心真的很难想到，初看题目有点看不懂，好不容易推演了两个测试，明白了题目的用意，但还是无从下手。一看题解代码和分析，就感觉自己是个傻zi。</p><blockquote><p>今天写了两个贪心的题目，<a href="https://leetcode-cn.com/problems/monotone-increasing-digits/">738. 单调递增的数字</a>以及<a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">714. 买卖股票的最佳时机含手续费</a>，这两题的代码都很简单，但都非常难想到。</p></blockquote><h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><ol start="738"><li>单调递增的数字</li></ol><pre><code class="java">class Solution &#123;    //解法一：暴力解法 很容易想到但是会超时    public int monotoneIncreasingDigits(int n) &#123;        for(int i=n;i&gt;0;i--)&#123;            if(check(i))                return i;        &#125;        return 0;    &#125;    public boolean check(int num)&#123;        int max=10;        while(num!=0)&#123;            int t=num%10;//取出最后一位元素            if(t&lt;=max)&#123;                max=t;            &#125;else&#123;                return false;            &#125;            num/=10;        &#125;        return true;    &#125;&#125;</code></pre><pre><code class="java">class Solution &#123;    /*解法二：从后往前遍历 n转化为字符数组a后 若a[i]&lt;a[i-1] 说明不是递增的 要进行调整    具体操作就是吧a[i-1]减一，以及把i以后的数字全部变成9，听起来很抽象。    如：n等于332 它的变化顺序是 332-&gt;329-&gt;299 这样经过两次调整就能得到正确结果，而且这    个算法时间复杂度是O(n).    */    public int monotoneIncreasingDigits(int n) &#123;        String s=String.valueOf(n);//转换成字符串更简单        int len=s.length();        int flag=len;        char[] a=s.toCharArray();        for(int i=len-1;i&gt;=1;i--)&#123;            if(a[i]&lt;a[i-1])&#123;                flag=i;                a[i-1]--;            &#125;        &#125;        for(int i=flag;i&lt;len;i++)&#123;            a[i]=&#39;9&#39;;        &#125;        return Integer.parseInt(new String(a));    &#125;&#125;</code></pre><ol start="714"><li><em><strong>买卖股票的最佳时机含手续费</strong></em></li></ol><pre><code class="java">class Solution &#123;    public int maxProfit(int[] prices, int fee) &#123;        int minPay=prices[0]+fee;        int sum=0;        for(int i:prices)&#123;            if(i+fee&lt;minPay)                minPay=i+fee;            else if(i&gt;minPay)&#123;                sum+=i-minPay;                minPay=i;            &#125;        &#125;        return sum;    &#125;&#125;</code></pre><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>第二个题太难想到了，我也不想写啥分析，头晕。好在是终于结束了贪心(仓促)，明天动态规划！</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;这两天被贪心折磨，贪心真的很难想到，初看题目有点看不懂，好不容易推演了两个测试，明白了题目的用意，但还是无从下手。一看题解代</summary>
-      
-    
-    
-    
-    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
-    
-    
-    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
-    
-  </entry>
-  
-  <entry>
     <title>刷题日记 day-5</title>
     <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%205/"/>
     <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%205/</id>
@@ -176,6 +152,30 @@
       
       
     <summary type="html">&lt;h2 id=&quot;初探贪心算法&quot;&gt;&lt;a href=&quot;#初探贪心算法&quot; class=&quot;headerlink&quot; title=&quot;初探贪心算法&quot;&gt;&lt;/a&gt;初探贪心算法&lt;/h2&gt;&lt;p&gt;​        终于结束了回溯，老实说回溯是真的有点难，虽然有模板，但是很多问题的解决方式不尽相同。刷了也</summary>
+      
+    
+    
+    
+    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
+    
+    
+    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>刷题日记 day-6</title>
+    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%206/"/>
+    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%206/</id>
+    <published>2021-09-23T16:00:00.000Z</published>
+    <updated>2021-09-24T08:29:19.641Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>这两天被贪心折磨，贪心真的很难想到，初看题目有点看不懂，好不容易推演了两个测试，明白了题目的用意，但还是无从下手。一看题解代码和分析，就感觉自己是个傻zi。</p><blockquote><p>今天写了两个贪心的题目，<a href="https://leetcode-cn.com/problems/monotone-increasing-digits/">738. 单调递增的数字</a>以及<a href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">714. 买卖股票的最佳时机含手续费</a>，这两题的代码都很简单，但都非常难想到。</p></blockquote><h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><ol start="738"><li>单调递增的数字</li></ol><pre><code class="java">class Solution &#123;    //解法一：暴力解法 很容易想到但是会超时    public int monotoneIncreasingDigits(int n) &#123;        for(int i=n;i&gt;0;i--)&#123;            if(check(i))                return i;        &#125;        return 0;    &#125;    public boolean check(int num)&#123;        int max=10;        while(num!=0)&#123;            int t=num%10;//取出最后一位元素            if(t&lt;=max)&#123;                max=t;            &#125;else&#123;                return false;            &#125;            num/=10;        &#125;        return true;    &#125;&#125;</code></pre><pre><code class="java">class Solution &#123;    /*解法二：从后往前遍历 n转化为字符数组a后 若a[i]&lt;a[i-1] 说明不是递增的 要进行调整    具体操作就是吧a[i-1]减一，以及把i以后的数字全部变成9，听起来很抽象。    如：n等于332 它的变化顺序是 332-&gt;329-&gt;299 这样经过两次调整就能得到正确结果，而且这    个算法时间复杂度是O(n).    */    public int monotoneIncreasingDigits(int n) &#123;        String s=String.valueOf(n);//转换成字符串更简单        int len=s.length();        int flag=len;        char[] a=s.toCharArray();        for(int i=len-1;i&gt;=1;i--)&#123;            if(a[i]&lt;a[i-1])&#123;                flag=i;                a[i-1]--;            &#125;        &#125;        for(int i=flag;i&lt;len;i++)&#123;            a[i]=&#39;9&#39;;        &#125;        return Integer.parseInt(new String(a));    &#125;&#125;</code></pre><ol start="714"><li><em><strong>买卖股票的最佳时机含手续费</strong></em></li></ol><pre><code class="java">class Solution &#123;    public int maxProfit(int[] prices, int fee) &#123;        int minPay=prices[0]+fee;        int sum=0;        for(int i:prices)&#123;            if(i+fee&lt;minPay)                minPay=i+fee;            else if(i&gt;minPay)&#123;                sum+=i-minPay;                minPay=i;            &#125;        &#125;        return sum;    &#125;&#125;</code></pre><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>第二个题太难想到了，我也不想写啥分析，头晕。好在是终于结束了贪心(仓促)，明天动态规划！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;这两天被贪心折磨，贪心真的很难想到，初看题目有点看不懂，好不容易推演了两个测试，明白了题目的用意，但还是无从下手。一看题解代</summary>
       
     
     
@@ -212,30 +212,6 @@
   </entry>
   
   <entry>
-    <title>刷题日记 day-3</title>
-    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%209/"/>
-    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%209/</id>
-    <published>2021-09-23T16:00:00.000Z</published>
-    <updated>2021-09-24T08:29:35.658Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="初识完全背包"><a href="#初识完全背包" class="headerlink" title="初识完全背包"></a>初识完全背包</h2><p>​        完全背包是背包问题的变形之一，老实说01背包我也才半知半解，今天看题解也还是雾中看花。完全背包就是背包只有一个，但是物品可以重复放入无数次。即每种物品有无数件。</p><p>​        首先我们列出01背包的核心代码：</p><pre><code class="java">for(int i=0;i&lt;weight.length;i++)&#123;//遍历物品    for(int j=bagWeight;j&gt;=weight[i];j--)&#123;//遍历背包容量        dp[j]=Math.max(dp[j],dp[j-weight[i]]+value[i]);    &#125;&#125;</code></pre><p><em>01背包内嵌的for循环是从大到小遍历，为了保证每个物品仅被添加一次。</em></p><p>而完全背包的物品可以添加多次，所以内层循环是要从小到大：</p><pre><code class="java">for(int i=0;i&lt;weight.length;i++)&#123;//遍历物品    for(int j=weight[i];j&lt;bagWeight;j++)&#123;//遍历背包容量        dp[j]=Math.max(dp[j],dp[j-weight[i]]+value[i]);    &#125;&#125;</code></pre><h2 id="两个小题"><a href="#两个小题" class="headerlink" title="两个小题"></a>两个小题</h2><h3 id="第一题：518-零钱兑换-II"><a href="#第一题：518-零钱兑换-II" class="headerlink" title="第一题：518. 零钱兑换 II"></a>第一题：<a href="https://leetcode-cn.com/problems/coin-change-2/">518. 零钱兑换 II</a></h3><p>给你一个整数数组 coins 表示不同面额的硬币，另给一个整数 amount 表示总金额。</p><p>请你计算并返回可以凑成总金额的硬币组合数。如果任何硬币组合都无法凑出总金额，返回 0 。</p><p>假设每一种面额的硬币有无限个。 </p><p>题目数据保证结果符合 32 位带符号整数</p><blockquote><p>实例：</p><p>输入：amount = 5, coins = [1, 2, 5]<br>输出：4<br>解释：有四种方式可以凑成总金额：<br>5=5<br>5=2+2+1<br>5=2+1+1+1<br>5=1+1+1+1+1</p></blockquote><h3 id="第二题：377-组合总和-Ⅳ"><a href="#第二题：377-组合总和-Ⅳ" class="headerlink" title="第二题：377. 组合总和 Ⅳ"></a>第二题：<a href="https://leetcode-cn.com/problems/combination-sum-iv/">377. 组合总和 Ⅳ</a></h3><p>给你一个由 不同 整数组成的数组 nums ，和一个目标整数 target 。请你从 nums 中找出并返回总和为 target 的元素组合的个数。</p><p>题目数据保证答案符合 32 位整数范围。</p><blockquote><p>实例：</p><p>输入：nums = [1,2,3], target = 4<br>输出：7<br>解释：<br>所有可能的组合为：<br>(1, 1, 1, 1)<br>(1, 1, 2)<br>(1, 2, 1)<br>(1, 3)<br>(2, 1, 1)<br>(2, 2)<br>(3, 1)<br>请注意，顺序不同的序列被视作不同的组合</p></blockquote><h2 id="代码详解"><a href="#代码详解" class="headerlink" title="代码详解"></a>代码详解</h2><h3 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h3><pre><code class="java">class Solution &#123;    public int change(int amount, int[] coins) &#123;        int[] dp=new int[amount+1];        dp[0]=1;        for(int i=0;i&lt;coins.length;i++)&#123;//遍历物品            for(int j=coins[i];j&lt;=amount;j++)&#123;//遍历背包                dp[j]+=dp[j-coins[i]];            &#125;        &#125;        return dp[amount];    &#125;&#125;</code></pre><h3 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h3><pre><code class="java">class Solution &#123;    public int combinationSum4(int[] nums, int target) &#123;        int[] dp=new int[target+1];        dp[0]=1;        for(int i=0;i&lt;=target;i++)&#123;//遍历背包            for(int j=0;j&lt;nums.length;j++)&#123;//遍历物品                if(i-nums[j]&gt;=0)&#123;                    dp[i]+=dp[i-nums[j]];                &#125;            &#125;        &#125;        return dp[target];    &#125;&#125;</code></pre><h2 id="分析与小结"><a href="#分析与小结" class="headerlink" title="分析与小结"></a>分析与小结</h2><p>这个完全背包，这里有两种类型：组合和排列。</p><p>从代码可以看出来：组合问题for循环是先遍历物品，再遍历背包，而排列问题for循环先遍历背包，再遍历物品。</p><p>全是套路呀！</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;初识完全背包&quot;&gt;&lt;a href=&quot;#初识完全背包&quot; class=&quot;headerlink&quot; title=&quot;初识完全背包&quot;&gt;&lt;/a&gt;初识完全背包&lt;/h2&gt;&lt;p&gt;​        完全背包是背包问题的变形之一，老实说01背包我也才半知半解，今天看题解也还是雾中看花。完全</summary>
-      
-    
-    
-    
-    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
-    
-    
-    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
-    
-  </entry>
-  
-  <entry>
     <title>刷题日记 day-8</title>
     <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%208/"/>
     <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%208/</id>
@@ -248,6 +224,54 @@
       
       
     <summary type="html">&lt;h2 id=&quot;初探01背包问题&quot;&gt;&lt;a href=&quot;#初探01背包问题&quot; class=&quot;headerlink&quot; title=&quot;初探01背包问题&quot;&gt;&lt;/a&gt;初探01背包问题&lt;/h2&gt;&lt;p&gt;​        记得我第一次遇到01背包还是上学期，在算法课上听过老师讲动态规划和回溯的时</summary>
+      
+    
+    
+    
+    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
+    
+    
+    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>刷题日记 day-2</title>
+    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/"/>
+    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/</id>
+    <published>2021-09-23T16:00:00.000Z</published>
+    <updated>2021-09-24T10:25:23.584Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一直没写主要是没啥兴趣，刷题在刚开始简直折磨，不夸张的说开始每一道题都是看答案的，有的看了答案也没弄懂，简直不知所云。对Java的集合类和数据结构也不是很熟悉，很多常用的方法函数不知道。经过20天左右的时间，我基本对刷题有一点的感觉了，开始越刷越快了。这个时候我想要慢下来，慢慢把刷的题总结一下。这就是再次写博客的理由。</p><h2 id="题目概述及解法"><a href="#题目概述及解法" class="headerlink" title="题目概述及解法"></a>题目概述及解法</h2><p>今天刷的还是回溯算法系列，这一题是：LeetCode第131题—<strong>分割回文串</strong></p><p>题目的意思是：<em>给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是 回文串 。返回 s 所有可能的分割方案。</em></p><p><em>回文串 是正着读和反着读都一样的字符串。</em></p><p>示例 1：</p><p>输入：s = “aab”<br>输出：[[“a”,”a”,”b”],[“aa”,”b”]]<br>示例 2：</p><p>输入：s = “a”<br>输出：[[“a”]]</p><p>提示：</p><p>1 &lt;= s.length &lt;= 16<br>s 仅由小写英文字母组成</p><h3 id="解法代码："><a href="#解法代码：" class="headerlink" title="解法代码："></a>解法代码：</h3><pre><code class="java">class Solution &#123;    List&lt;List&lt;String&gt;&gt; res= new ArrayList&lt;&gt;();//存放正确结果的集合    Deque&lt;String&gt; path=new LinkedList&lt;&gt;();//存放单个正确结果(这里选择双端队列，若选择list删除时会出现错误)    public List&lt;List&lt;String&gt;&gt; partition(String s) &#123;        backtracking(s,0);        return res;    &#125;    public void backtracking(String s,int index)&#123;//回溯函数(也是递归函数)        //确定回溯的终止条件(本题是： 当截取字符串的位置到达字符串最后一位就说明此次获取完成)        if(index&gt;=s.length())&#123;            res.add(new ArrayList&lt;&gt;(path));            return;        &#125;        //for循环是解空间树的横向遍历，而回溯函数是解空间树的纵向遍历        for(int i=index;i&lt;s.length();i++)&#123;            //先判断是否是回文串，是就截取放入path中，不是就跳过这次循环            if(isHuiWen(s,index,i))&#123;                String str=s.substring(index,i+1);                path.addLast(str);            &#125;else&#123;                continue;            &#125;            backtracking(s,i+1);//回溯函数(i+1是为了不再重复的截取)            path.removeLast();//回溯 撤销之前处理节点的过程        &#125;            &#125;    //下面这个函数是判断是否是回文串    public boolean isHuiWen(String s,int index,int end)&#123;        for(int i=index,j=end;i&lt;j;i++,j--)&#123;            if(s.charAt(i)!=s.charAt(j))                return false;        &#125;        return true;    &#125;&#125;</code></pre><p>解法我在代码上做了详细的注释说明，主要就是截取字符串和数据结构Deque的选择。</p><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>虽然每天写的题不只一题，但是要是全部都记录下来，有点费时间，还是每天找一个喜欢的记录，这样也挺好的。</p><p>​                                                      <em><strong>加油</strong></em></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一</summary>
+      
+    
+    
+    
+    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
+    
+    
+    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>刷题日记 day-3</title>
+    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%209/"/>
+    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%209/</id>
+    <published>2021-09-23T16:00:00.000Z</published>
+    <updated>2021-09-24T08:29:35.658Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="初识完全背包"><a href="#初识完全背包" class="headerlink" title="初识完全背包"></a>初识完全背包</h2><p>​        完全背包是背包问题的变形之一，老实说01背包我也才半知半解，今天看题解也还是雾中看花。完全背包就是背包只有一个，但是物品可以重复放入无数次。即每种物品有无数件。</p><p>​        首先我们列出01背包的核心代码：</p><pre><code class="java">for(int i=0;i&lt;weight.length;i++)&#123;//遍历物品    for(int j=bagWeight;j&gt;=weight[i];j--)&#123;//遍历背包容量        dp[j]=Math.max(dp[j],dp[j-weight[i]]+value[i]);    &#125;&#125;</code></pre><p><em>01背包内嵌的for循环是从大到小遍历，为了保证每个物品仅被添加一次。</em></p><p>而完全背包的物品可以添加多次，所以内层循环是要从小到大：</p><pre><code class="java">for(int i=0;i&lt;weight.length;i++)&#123;//遍历物品    for(int j=weight[i];j&lt;bagWeight;j++)&#123;//遍历背包容量        dp[j]=Math.max(dp[j],dp[j-weight[i]]+value[i]);    &#125;&#125;</code></pre><h2 id="两个小题"><a href="#两个小题" class="headerlink" title="两个小题"></a>两个小题</h2><h3 id="第一题：518-零钱兑换-II"><a href="#第一题：518-零钱兑换-II" class="headerlink" title="第一题：518. 零钱兑换 II"></a>第一题：<a href="https://leetcode-cn.com/problems/coin-change-2/">518. 零钱兑换 II</a></h3><p>给你一个整数数组 coins 表示不同面额的硬币，另给一个整数 amount 表示总金额。</p><p>请你计算并返回可以凑成总金额的硬币组合数。如果任何硬币组合都无法凑出总金额，返回 0 。</p><p>假设每一种面额的硬币有无限个。 </p><p>题目数据保证结果符合 32 位带符号整数</p><blockquote><p>实例：</p><p>输入：amount = 5, coins = [1, 2, 5]<br>输出：4<br>解释：有四种方式可以凑成总金额：<br>5=5<br>5=2+2+1<br>5=2+1+1+1<br>5=1+1+1+1+1</p></blockquote><h3 id="第二题：377-组合总和-Ⅳ"><a href="#第二题：377-组合总和-Ⅳ" class="headerlink" title="第二题：377. 组合总和 Ⅳ"></a>第二题：<a href="https://leetcode-cn.com/problems/combination-sum-iv/">377. 组合总和 Ⅳ</a></h3><p>给你一个由 不同 整数组成的数组 nums ，和一个目标整数 target 。请你从 nums 中找出并返回总和为 target 的元素组合的个数。</p><p>题目数据保证答案符合 32 位整数范围。</p><blockquote><p>实例：</p><p>输入：nums = [1,2,3], target = 4<br>输出：7<br>解释：<br>所有可能的组合为：<br>(1, 1, 1, 1)<br>(1, 1, 2)<br>(1, 2, 1)<br>(1, 3)<br>(2, 1, 1)<br>(2, 2)<br>(3, 1)<br>请注意，顺序不同的序列被视作不同的组合</p></blockquote><h2 id="代码详解"><a href="#代码详解" class="headerlink" title="代码详解"></a>代码详解</h2><h3 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h3><pre><code class="java">class Solution &#123;    public int change(int amount, int[] coins) &#123;        int[] dp=new int[amount+1];        dp[0]=1;        for(int i=0;i&lt;coins.length;i++)&#123;//遍历物品            for(int j=coins[i];j&lt;=amount;j++)&#123;//遍历背包                dp[j]+=dp[j-coins[i]];            &#125;        &#125;        return dp[amount];    &#125;&#125;</code></pre><h3 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h3><pre><code class="java">class Solution &#123;    public int combinationSum4(int[] nums, int target) &#123;        int[] dp=new int[target+1];        dp[0]=1;        for(int i=0;i&lt;=target;i++)&#123;//遍历背包            for(int j=0;j&lt;nums.length;j++)&#123;//遍历物品                if(i-nums[j]&gt;=0)&#123;                    dp[i]+=dp[i-nums[j]];                &#125;            &#125;        &#125;        return dp[target];    &#125;&#125;</code></pre><h2 id="分析与小结"><a href="#分析与小结" class="headerlink" title="分析与小结"></a>分析与小结</h2><p>这个完全背包，这里有两种类型：组合和排列。</p><p>从代码可以看出来：组合问题for循环是先遍历物品，再遍历背包，而排列问题for循环先遍历背包，再遍历物品。</p><p>全是套路呀！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;初识完全背包&quot;&gt;&lt;a href=&quot;#初识完全背包&quot; class=&quot;headerlink&quot; title=&quot;初识完全背包&quot;&gt;&lt;/a&gt;初识完全背包&lt;/h2&gt;&lt;p&gt;​        完全背包是背包问题的变形之一，老实说01背包我也才半知半解，今天看题解也还是雾中看花。完全</summary>
       
     
     
@@ -273,30 +297,6 @@
       
     <summary type="html">&lt;h2 id=&quot;题目概述&quot;&gt;&lt;a href=&quot;#题目概述&quot; class=&quot;headerlink&quot; title=&quot;题目概述&quot;&gt;&lt;/a&gt;题目概述&lt;/h2&gt;&lt;p&gt;LeetCode第46题：&lt;em&gt;全排列&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;给定一个不含重复数字的数组 nums ，返回其 所有可能的</summary>
-      
-    
-    
-    
-    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
-    
-    
-    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>刷题日记 day-2</title>
-    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/"/>
-    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/</id>
-    <published>2021-09-23T16:00:00.000Z</published>
-    <updated>2021-09-24T10:25:23.584Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一直没写主要是没啥兴趣，刷题在刚开始简直折磨，不夸张的说开始每一道题都是看答案的，有的看了答案也没弄懂，简直不知所云。对Java的集合类和数据结构也不是很熟悉，很多常用的方法函数不知道。经过20天左右的时间，我基本对刷题有一点的感觉了，开始越刷越快了。这个时候我想要慢下来，慢慢把刷的题总结一下。这就是再次写博客的理由。</p><h2 id="题目概述及解法"><a href="#题目概述及解法" class="headerlink" title="题目概述及解法"></a>题目概述及解法</h2><p>今天刷的还是回溯算法系列，这一题是：LeetCode第131题—<strong>分割回文串</strong></p><p>题目的意思是：<em>给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是 回文串 。返回 s 所有可能的分割方案。</em></p><p><em>回文串 是正着读和反着读都一样的字符串。</em></p><p>示例 1：</p><p>输入：s = “aab”<br>输出：[[“a”,”a”,”b”],[“aa”,”b”]]<br>示例 2：</p><p>输入：s = “a”<br>输出：[[“a”]]</p><p>提示：</p><p>1 &lt;= s.length &lt;= 16<br>s 仅由小写英文字母组成</p><h3 id="解法代码："><a href="#解法代码：" class="headerlink" title="解法代码："></a>解法代码：</h3><pre><code class="java">class Solution &#123;    List&lt;List&lt;String&gt;&gt; res= new ArrayList&lt;&gt;();//存放正确结果的集合    Deque&lt;String&gt; path=new LinkedList&lt;&gt;();//存放单个正确结果(这里选择双端队列，若选择list删除时会出现错误)    public List&lt;List&lt;String&gt;&gt; partition(String s) &#123;        backtracking(s,0);        return res;    &#125;    public void backtracking(String s,int index)&#123;//回溯函数(也是递归函数)        //确定回溯的终止条件(本题是： 当截取字符串的位置到达字符串最后一位就说明此次获取完成)        if(index&gt;=s.length())&#123;            res.add(new ArrayList&lt;&gt;(path));            return;        &#125;        //for循环是解空间树的横向遍历，而回溯函数是解空间树的纵向遍历        for(int i=index;i&lt;s.length();i++)&#123;            //先判断是否是回文串，是就截取放入path中，不是就跳过这次循环            if(isHuiWen(s,index,i))&#123;                String str=s.substring(index,i+1);                path.addLast(str);            &#125;else&#123;                continue;            &#125;            backtracking(s,i+1);//回溯函数(i+1是为了不再重复的截取)            path.removeLast();//回溯 撤销之前处理节点的过程        &#125;            &#125;    //下面这个函数是判断是否是回文串    public boolean isHuiWen(String s,int index,int end)&#123;        for(int i=index,j=end;i&lt;j;i++,j--)&#123;            if(s.charAt(i)!=s.charAt(j))                return false;        &#125;        return true;    &#125;&#125;</code></pre><p>解法我在代码上做了详细的注释说明，主要就是截取字符串和数据结构Deque的选择。</p><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>虽然每天写的题不只一题，但是要是全部都记录下来，有点费时间，还是每天找一个喜欢的记录，这样也挺好的。</p><p>​                                                      <em><strong>加油</strong></em></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一</summary>
       
     
     
