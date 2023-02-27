@@ -117,6 +117,30 @@
   </entry>
   
   <entry>
+    <title>刷题日记 day-10</title>
+    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%2010/"/>
+    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%2010/</id>
+    <published>2021-09-23T16:00:00.000Z</published>
+    <updated>2021-09-24T08:28:49.570Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>​        李奶奶的动态规划！！！真的觉得自己智商过低，不适合刷动态规划。于是我找了一个稍微简单一点的链表问题，题目来自于：**LeetCode <a href="https://leetcode-cn.com/problems/reorder-list/">143. 重排链表</a>**，这个题目的解法思路很多，我也想出来几种。但由于我对链表结构的不够熟悉，不能完美的利用链表结构特点，只能理解别人写的题解。题解的思路也很好理解：</p><ol><li>找到链表的中点分割链表</li><li>将分割后的后半部分进行链表反转</li><li>将翻转后的链表和前半部分进行合并</li></ol><p>题目的背景如下： 给定一个单链表 L 的头节点 head ，单链表 L 表示为：</p><p> L0 → L1 → … → Ln-1 → Ln<br>请将其重新排列后变为：</p><p>L0 → Ln → L1 → Ln-1 → L2 → Ln-2 → …</p><p>不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p><p>实例：</p><blockquote><p>输入: head = [1,2,3,4]<br>输出: [1,4,2,3]</p></blockquote><blockquote><p>输入: head = [1,2,3,4,5]<br>输出: [1,5,2,4,3]</p></blockquote><h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><pre><code class="java">/** * Definition for singly-linked list.         这是关于链表结构的说明 * public class ListNode &#123; *     int val; *     ListNode next; *     ListNode() &#123;&#125; *     ListNode(int val) &#123; this.val = val; &#125; *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125; * &#125; */class Solution &#123;    public void reorderList(ListNode head) &#123;        if(head.next==null||head.next.next==null)            return ;        ListNode fast=head;        ListNode slow=head;        //快慢指针 找到中点        //具体是快指针一次走两步 慢指针一次走一步 快指针走到头 慢指针走到链表中点        while(fast.next!=null&amp;&amp;fast.next.next!=null)&#123;            fast=fast.next.next;            slow=slow.next;        &#125;        ListNode newHead=slow.next;        slow.next=null;        newHead=reverse(newHead);        while(newHead!=null)&#123;            ListNode temp = newHead.next;            newHead.next = head.next;            head.next = newHead;            head = newHead.next;            newHead = temp;        &#125;    &#125;    //反转链表    public ListNode reverse(ListNode head)&#123;        ListNode pre=null;        ListNode next=null;        while(head!=null)&#123;            next = head.next;            head.next = pre;            pre = head;            head = next;        &#125;        return pre;    &#125;&#125;</code></pre><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>​        这个题目思路虽然不难想，但是实现有很多技巧，例如快慢指针、反转链表、合并链表这些小技巧，这都是阶梯模板。任重道远！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;​        李奶奶的动态规划！！！真的觉得自己智商过低，不适合刷动态规划。于是我找了一个稍微简单一点的链表问题，题目来</summary>
+      
+    
+    
+    
+    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
+    
+    
+    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
+    
+  </entry>
+  
+  <entry>
     <title>刷题日记 day-4</title>
     <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%204/"/>
     <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%204/</id>
@@ -130,30 +154,6 @@
       
     <summary type="html">&lt;h2 id=&quot;题目背景介绍&quot;&gt;&lt;a href=&quot;#题目背景介绍&quot; class=&quot;headerlink&quot; title=&quot;题目背景介绍&quot;&gt;&lt;/a&gt;题目背景介绍&lt;/h2&gt;&lt;p&gt;今天写的是回溯算法解决的n皇后，在LeetCode上是第51题，难度是困难！&lt;/p&gt;
 &lt;p&gt;n 皇后问题 研</summary>
-      
-    
-    
-    
-    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
-    
-    
-    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>刷题日记 day-10</title>
-    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%2010/"/>
-    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%2010/</id>
-    <published>2021-09-23T16:00:00.000Z</published>
-    <updated>2021-09-24T08:28:49.570Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>​        李奶奶的动态规划！！！真的觉得自己智商过低，不适合刷动态规划。于是我找了一个稍微简单一点的链表问题，题目来自于：**LeetCode <a href="https://leetcode-cn.com/problems/reorder-list/">143. 重排链表</a>**，这个题目的解法思路很多，我也想出来几种。但由于我对链表结构的不够熟悉，不能完美的利用链表结构特点，只能理解别人写的题解。题解的思路也很好理解：</p><ol><li>找到链表的中点分割链表</li><li>将分割后的后半部分进行链表反转</li><li>将翻转后的链表和前半部分进行合并</li></ol><p>题目的背景如下： 给定一个单链表 L 的头节点 head ，单链表 L 表示为：</p><p> L0 → L1 → … → Ln-1 → Ln<br>请将其重新排列后变为：</p><p>L0 → Ln → L1 → Ln-1 → L2 → Ln-2 → …</p><p>不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p><p>实例：</p><blockquote><p>输入: head = [1,2,3,4]<br>输出: [1,4,2,3]</p></blockquote><blockquote><p>输入: head = [1,2,3,4,5]<br>输出: [1,5,2,4,3]</p></blockquote><h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><pre><code class="java">/** * Definition for singly-linked list.         这是关于链表结构的说明 * public class ListNode &#123; *     int val; *     ListNode next; *     ListNode() &#123;&#125; *     ListNode(int val) &#123; this.val = val; &#125; *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125; * &#125; */class Solution &#123;    public void reorderList(ListNode head) &#123;        if(head.next==null||head.next.next==null)            return ;        ListNode fast=head;        ListNode slow=head;        //快慢指针 找到中点        //具体是快指针一次走两步 慢指针一次走一步 快指针走到头 慢指针走到链表中点        while(fast.next!=null&amp;&amp;fast.next.next!=null)&#123;            fast=fast.next.next;            slow=slow.next;        &#125;        ListNode newHead=slow.next;        slow.next=null;        newHead=reverse(newHead);        while(newHead!=null)&#123;            ListNode temp = newHead.next;            newHead.next = head.next;            head.next = newHead;            head = newHead.next;            newHead = temp;        &#125;    &#125;    //反转链表    public ListNode reverse(ListNode head)&#123;        ListNode pre=null;        ListNode next=null;        while(head!=null)&#123;            next = head.next;            head.next = pre;            pre = head;            head = next;        &#125;        return pre;    &#125;&#125;</code></pre><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>​        这个题目思路虽然不难想，但是实现有很多技巧，例如快慢指针、反转链表、合并链表这些小技巧，这都是阶梯模板。任重道远！</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;​        李奶奶的动态规划！！！真的觉得自己智商过低，不适合刷动态规划。于是我找了一个稍微简单一点的链表问题，题目来</summary>
       
     
     
@@ -190,30 +190,6 @@
   </entry>
   
   <entry>
-    <title>刷题日记 day-7</title>
-    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%207/"/>
-    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%207/</id>
-    <published>2021-09-23T16:00:00.000Z</published>
-    <updated>2021-09-24T08:29:24.428Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="何为动态规划"><a href="#何为动态规划" class="headerlink" title="何为动态规划"></a>何为动态规划</h2><p>​        动态规划就是Dynamic Programming，简称DP。如果解决一个问题需要解决它的很多重叠子问题，这个时候就需要用到动态规划。</p><p>​        动态规划的解题步骤：</p><ol><li>确定dp数组以及下标的含义</li><li>确定递推公式</li><li>dp数组的初始化</li><li>确定遍历顺序</li><li>举例推导dp数组</li></ol><h2 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h2><p>今天写的第一题是我们的老熟题：<a href="https://leetcode-cn.com/problems/fibonacci-number/">509. 斐波那契数</a> 。这个题目之前用的是递归，今天是动态规划。今天的第二题就有点难理解了：<a href="https://leetcode-cn.com/problems/min-cost-climbing-stairs/">746. 使用最小花费爬楼梯</a>。</p><h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><ol start="509"><li><em><strong>斐波那契数</strong></em></li></ol><pre><code class="java">class Solution &#123;    public int fib(int n) &#123;        if(n&lt;=1)            return n;        int[] dp=new int[n+1];        dp[0]=0;        dp[1]=1;        for(int i=2;i&lt;dp.length;i++)&#123;            dp[i]=dp[i-1]+dp[i-2];//这个就是递推公式        &#125;        return dp[n];    &#125;&#125;</code></pre><ol start="746"><li><em><strong>使用最小花费爬楼梯</strong></em></li></ol><pre><code class="java">class Solution &#123;    public int minCostClimbingStairs(int[] cost) &#123;        int len=cost.length;        int[] dp=new int[len];        dp[0]=cost[0];        dp[1]=cost[1];        for(int i=2;i&lt;len;i++)&#123;            //递推关系式            dp[i]=Math.min(dp[i-1]+cost[i],dp[i-2]+cost[i]);        &#125;        return Math.min(dp[len-1],dp[len-2]);    &#125;&#125;</code></pre><h2 id="分析与小结"><a href="#分析与小结" class="headerlink" title="分析与小结"></a>分析与小结</h2><p>​        从题解代码就可以很清楚的看出，dp数组的下标就表示第几个斐波那契数，而数组相对存储的就是第几个斐波那契数的值，递推公式题目也给了。所以解题十分方便。而第二题是斐波那契数列的变形，非常巧妙。我们每到达一个阶梯，都是从它的上一级或者上两级阶梯，所以当前花费最小将从它的上一级花费和上上一级花费之中诞生。这就是递推关系式： dp[i]=Math.min(dp[i-1]+cost[i],dp[i-2]+cost[i]);的由来。</p><p>​        今天的动态规划就到这里，持之以恒！</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;何为动态规划&quot;&gt;&lt;a href=&quot;#何为动态规划&quot; class=&quot;headerlink&quot; title=&quot;何为动态规划&quot;&gt;&lt;/a&gt;何为动态规划&lt;/h2&gt;&lt;p&gt;​        动态规划就是Dynamic Programming，简称DP。如果解决一个问题需要解决它的</summary>
-      
-    
-    
-    
-    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
-    
-    
-    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
-    
-  </entry>
-  
-  <entry>
     <title>刷题日记 day-6</title>
     <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%206/"/>
     <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%206/</id>
@@ -226,6 +202,30 @@
       
       
     <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;这两天被贪心折磨，贪心真的很难想到，初看题目有点看不懂，好不容易推演了两个测试，明白了题目的用意，但还是无从下手。一看题解代</summary>
+      
+    
+    
+    
+    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
+    
+    
+    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>刷题日记 day-7</title>
+    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%207/"/>
+    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%207/</id>
+    <published>2021-09-23T16:00:00.000Z</published>
+    <updated>2021-09-24T08:29:24.428Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="何为动态规划"><a href="#何为动态规划" class="headerlink" title="何为动态规划"></a>何为动态规划</h2><p>​        动态规划就是Dynamic Programming，简称DP。如果解决一个问题需要解决它的很多重叠子问题，这个时候就需要用到动态规划。</p><p>​        动态规划的解题步骤：</p><ol><li>确定dp数组以及下标的含义</li><li>确定递推公式</li><li>dp数组的初始化</li><li>确定遍历顺序</li><li>举例推导dp数组</li></ol><h2 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h2><p>今天写的第一题是我们的老熟题：<a href="https://leetcode-cn.com/problems/fibonacci-number/">509. 斐波那契数</a> 。这个题目之前用的是递归，今天是动态规划。今天的第二题就有点难理解了：<a href="https://leetcode-cn.com/problems/min-cost-climbing-stairs/">746. 使用最小花费爬楼梯</a>。</p><h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><ol start="509"><li><em><strong>斐波那契数</strong></em></li></ol><pre><code class="java">class Solution &#123;    public int fib(int n) &#123;        if(n&lt;=1)            return n;        int[] dp=new int[n+1];        dp[0]=0;        dp[1]=1;        for(int i=2;i&lt;dp.length;i++)&#123;            dp[i]=dp[i-1]+dp[i-2];//这个就是递推公式        &#125;        return dp[n];    &#125;&#125;</code></pre><ol start="746"><li><em><strong>使用最小花费爬楼梯</strong></em></li></ol><pre><code class="java">class Solution &#123;    public int minCostClimbingStairs(int[] cost) &#123;        int len=cost.length;        int[] dp=new int[len];        dp[0]=cost[0];        dp[1]=cost[1];        for(int i=2;i&lt;len;i++)&#123;            //递推关系式            dp[i]=Math.min(dp[i-1]+cost[i],dp[i-2]+cost[i]);        &#125;        return Math.min(dp[len-1],dp[len-2]);    &#125;&#125;</code></pre><h2 id="分析与小结"><a href="#分析与小结" class="headerlink" title="分析与小结"></a>分析与小结</h2><p>​        从题解代码就可以很清楚的看出，dp数组的下标就表示第几个斐波那契数，而数组相对存储的就是第几个斐波那契数的值，递推公式题目也给了。所以解题十分方便。而第二题是斐波那契数列的变形，非常巧妙。我们每到达一个阶梯，都是从它的上一级或者上两级阶梯，所以当前花费最小将从它的上一级花费和上上一级花费之中诞生。这就是递推关系式： dp[i]=Math.min(dp[i-1]+cost[i],dp[i-2]+cost[i]);的由来。</p><p>​        今天的动态规划就到这里，持之以恒！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;何为动态规划&quot;&gt;&lt;a href=&quot;#何为动态规划&quot; class=&quot;headerlink&quot; title=&quot;何为动态规划&quot;&gt;&lt;/a&gt;何为动态规划&lt;/h2&gt;&lt;p&gt;​        动态规划就是Dynamic Programming，简称DP。如果解决一个问题需要解决它的</summary>
       
     
     
@@ -286,6 +286,30 @@
   </entry>
   
   <entry>
+    <title>刷题日记 day-2</title>
+    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/"/>
+    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/</id>
+    <published>2021-09-23T16:00:00.000Z</published>
+    <updated>2021-09-24T10:25:23.584Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一直没写主要是没啥兴趣，刷题在刚开始简直折磨，不夸张的说开始每一道题都是看答案的，有的看了答案也没弄懂，简直不知所云。对Java的集合类和数据结构也不是很熟悉，很多常用的方法函数不知道。经过20天左右的时间，我基本对刷题有一点的感觉了，开始越刷越快了。这个时候我想要慢下来，慢慢把刷的题总结一下。这就是再次写博客的理由。</p><h2 id="题目概述及解法"><a href="#题目概述及解法" class="headerlink" title="题目概述及解法"></a>题目概述及解法</h2><p>今天刷的还是回溯算法系列，这一题是：LeetCode第131题—<strong>分割回文串</strong></p><p>题目的意思是：<em>给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是 回文串 。返回 s 所有可能的分割方案。</em></p><p><em>回文串 是正着读和反着读都一样的字符串。</em></p><p>示例 1：</p><p>输入：s = “aab”<br>输出：[[“a”,”a”,”b”],[“aa”,”b”]]<br>示例 2：</p><p>输入：s = “a”<br>输出：[[“a”]]</p><p>提示：</p><p>1 &lt;= s.length &lt;= 16<br>s 仅由小写英文字母组成</p><h3 id="解法代码："><a href="#解法代码：" class="headerlink" title="解法代码："></a>解法代码：</h3><pre><code class="java">class Solution &#123;    List&lt;List&lt;String&gt;&gt; res= new ArrayList&lt;&gt;();//存放正确结果的集合    Deque&lt;String&gt; path=new LinkedList&lt;&gt;();//存放单个正确结果(这里选择双端队列，若选择list删除时会出现错误)    public List&lt;List&lt;String&gt;&gt; partition(String s) &#123;        backtracking(s,0);        return res;    &#125;    public void backtracking(String s,int index)&#123;//回溯函数(也是递归函数)        //确定回溯的终止条件(本题是： 当截取字符串的位置到达字符串最后一位就说明此次获取完成)        if(index&gt;=s.length())&#123;            res.add(new ArrayList&lt;&gt;(path));            return;        &#125;        //for循环是解空间树的横向遍历，而回溯函数是解空间树的纵向遍历        for(int i=index;i&lt;s.length();i++)&#123;            //先判断是否是回文串，是就截取放入path中，不是就跳过这次循环            if(isHuiWen(s,index,i))&#123;                String str=s.substring(index,i+1);                path.addLast(str);            &#125;else&#123;                continue;            &#125;            backtracking(s,i+1);//回溯函数(i+1是为了不再重复的截取)            path.removeLast();//回溯 撤销之前处理节点的过程        &#125;            &#125;    //下面这个函数是判断是否是回文串    public boolean isHuiWen(String s,int index,int end)&#123;        for(int i=index,j=end;i&lt;j;i++,j--)&#123;            if(s.charAt(i)!=s.charAt(j))                return false;        &#125;        return true;    &#125;&#125;</code></pre><p>解法我在代码上做了详细的注释说明，主要就是截取字符串和数据结构Deque的选择。</p><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>虽然每天写的题不只一题，但是要是全部都记录下来，有点费时间，还是每天找一个喜欢的记录，这样也挺好的。</p><p>​                                                      <em><strong>加油</strong></em></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一</summary>
+      
+    
+    
+    
+    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
+    
+    
+    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
+    
+  </entry>
+  
+  <entry>
     <title>刷题日记 day-3</title>
     <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%203/"/>
     <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%203/</id>
@@ -299,30 +323,6 @@
       
     <summary type="html">&lt;h2 id=&quot;题目概述&quot;&gt;&lt;a href=&quot;#题目概述&quot; class=&quot;headerlink&quot; title=&quot;题目概述&quot;&gt;&lt;/a&gt;题目概述&lt;/h2&gt;&lt;p&gt;LeetCode第46题：&lt;em&gt;全排列&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;给定一个不含重复数字的数组 nums ，返回其 所有可能的</summary>
-      
-    
-    
-    
-    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
-    
-    
-    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>刷题日记 day-2</title>
-    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/"/>
-    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0day%202/</id>
-    <published>2021-09-23T16:00:00.000Z</published>
-    <updated>2021-09-24T10:25:23.584Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一直没写主要是没啥兴趣，刷题在刚开始简直折磨，不夸张的说开始每一道题都是看答案的，有的看了答案也没弄懂，简直不知所云。对Java的集合类和数据结构也不是很熟悉，很多常用的方法函数不知道。经过20天左右的时间，我基本对刷题有一点的感觉了，开始越刷越快了。这个时候我想要慢下来，慢慢把刷的题总结一下。这就是再次写博客的理由。</p><h2 id="题目概述及解法"><a href="#题目概述及解法" class="headerlink" title="题目概述及解法"></a>题目概述及解法</h2><p>今天刷的还是回溯算法系列，这一题是：LeetCode第131题—<strong>分割回文串</strong></p><p>题目的意思是：<em>给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是 回文串 。返回 s 所有可能的分割方案。</em></p><p><em>回文串 是正着读和反着读都一样的字符串。</em></p><p>示例 1：</p><p>输入：s = “aab”<br>输出：[[“a”,”a”,”b”],[“aa”,”b”]]<br>示例 2：</p><p>输入：s = “a”<br>输出：[[“a”]]</p><p>提示：</p><p>1 &lt;= s.length &lt;= 16<br>s 仅由小写英文字母组成</p><h3 id="解法代码："><a href="#解法代码：" class="headerlink" title="解法代码："></a>解法代码：</h3><pre><code class="java">class Solution &#123;    List&lt;List&lt;String&gt;&gt; res= new ArrayList&lt;&gt;();//存放正确结果的集合    Deque&lt;String&gt; path=new LinkedList&lt;&gt;();//存放单个正确结果(这里选择双端队列，若选择list删除时会出现错误)    public List&lt;List&lt;String&gt;&gt; partition(String s) &#123;        backtracking(s,0);        return res;    &#125;    public void backtracking(String s,int index)&#123;//回溯函数(也是递归函数)        //确定回溯的终止条件(本题是： 当截取字符串的位置到达字符串最后一位就说明此次获取完成)        if(index&gt;=s.length())&#123;            res.add(new ArrayList&lt;&gt;(path));            return;        &#125;        //for循环是解空间树的横向遍历，而回溯函数是解空间树的纵向遍历        for(int i=index;i&lt;s.length();i++)&#123;            //先判断是否是回文串，是就截取放入path中，不是就跳过这次循环            if(isHuiWen(s,index,i))&#123;                String str=s.substring(index,i+1);                path.addLast(str);            &#125;else&#123;                continue;            &#125;            backtracking(s,i+1);//回溯函数(i+1是为了不再重复的截取)            path.removeLast();//回溯 撤销之前处理节点的过程        &#125;            &#125;    //下面这个函数是判断是否是回文串    public boolean isHuiWen(String s,int index,int end)&#123;        for(int i=index,j=end;i&lt;j;i++,j--)&#123;            if(s.charAt(i)!=s.charAt(j))                return false;        &#125;        return true;    &#125;&#125;</code></pre><p>解法我在代码上做了详细的注释说明，主要就是截取字符串和数据结构Deque的选择。</p><h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>虽然每天写的题不只一题，但是要是全部都记录下来，有点费时间，还是每天找一个喜欢的记录，这样也挺好的。</p><p>​                                                      <em><strong>加油</strong></em></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h2&gt;&lt;p&gt;好久没写博客了，虽然我的博客没人看，但是我觉得写博客是为了将自己的知识水平提高。写博客还可以让以后回顾知识变得更简单。之前一</summary>
       
     
     
