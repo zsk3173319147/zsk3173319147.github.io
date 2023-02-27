@@ -41,6 +41,32 @@
   </entry>
   
   <entry>
+    <title>操作系统复习</title>
+    <link href="http://example.com/2022/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%A4%8D%E4%B9%A0/"/>
+    <id>http://example.com/2022/05/14/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%A4%8D%E4%B9%A0/</id>
+    <published>2022-05-13T16:00:00.000Z</published>
+    <updated>2023-02-27T07:45:19.439Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="重点问题"><a href="#重点问题" class="headerlink" title="重点问题"></a>重点问题</h3><ul><li><p><strong>什么是操作系统，它有哪些功能和特征</strong></p><p>操作系统(operating system)，是管理和控制计算机软硬件资源的程序。是直接运行在裸机上的最基本的系统软件。任何软件都需要操作系统的支持。</p><ul><li>操作系统可以进行处理机管理、存储器管理、设备管理、文件管理</li><li>操作系统控制管理软硬件及数据资源，控制程序运行、改善人机交互界面，按照程序的请求分配资源</li><li>操作系统的特征：<ul><li>并发 同一时间间隔</li><li>共享 进程共享系统的资源</li><li>虚拟 把物理实体变成逻辑对应物</li><li>异步 进程的执行不是一走到底，而是走走停停，以不可预知的速度向前推进</li></ul></li></ul></li><li><p><strong>详细说说操作系统的管理功能</strong></p><ul><li>处理机管理：进程控制、进程同步、进程通信、进程调度</li><li>存储管理：内存分配、内存保护、内存扩充、地址映射</li><li>设备管理：缓冲管理、设备分配、设备处理程序</li><li>文件管理：文件存储空间的管理、目录管理、文件的读写管理和保护</li></ul></li><li><p><strong>操作系统的发展过程</strong></p><ul><li>手工阶段，无操作系统，计算机的所有工作都需要人工干预，CPU利用率低</li><li>单道批处理系统，在主机和输入机之间增加一个存储设备—-磁带机，提高了计算机资源的利用率，但每次内存中仅存放一道作业</li><li>多道批处理系统，允许多个程序同时进入内存并运行，不提供人机交互能力，不利于用户操作</li><li>分时操作系统，把处理机的运行时间分很短时间片，按时间片轮流把处理及分配给作业使用</li><li>实时操作系统分为软实时和硬实时，硬实时是飞机、导弹自动控制，软实时预定飞机票查询航班</li><li>网络操作系统和分布式操作系统</li></ul></li><li><p>什么是管态和目态，</p><ul><li>管态又被称为特权态和核心态，CPU在管态可以执行指令系统的全集，可以访问系统的所有资源</li><li>目态又称用户态，只能执行非特权指令，不能改变CPU的状态，只能访问当前程序的存储空间</li><li>区分管态和目态的目的是为了保护操作系统程序，内核程序不允许用户直接执行</li></ul></li><li><p><strong>怎么从用户态切换到管态？</strong></p><ul><li>系统调用</li><li>异常</li><li>I/O设备的中断</li><li>系统调用是进程主动发起的，而异常和中断是被动地</li></ul></li><li><p><strong>进程和线程的区别？</strong></p><ul><li>线程就是轻量级进程，它是CPU调度的基本执行单元，由线程ID、程序计数器、寄存器集合、堆栈组成，线程属于进程</li><li>进程是资源分配和调度的基本单位，线程是CPU调度的基本单元</li><li>进程里面可以有多个线程，线程共享进程内的资源</li><li>进程的创建使用fork和vfork，而线程的创建使用pthread_create；</li></ul></li><li><p><strong>进程间的通信方式有哪些？</strong></p><ul><li>共享内存模式 在通信进程之间存在一块直接访问的共享空间</li><li>消息传递模式 进程必须使用系统提供的发送消息和接收消息两个原语 又称信箱通信</li><li>共享文件模式 连接一个读进程和一个写进程以实现它们之间通信的文件就是共享文件，又称pipe管道文件</li></ul></li><li><p><strong>高级调度和低级调度的区别？以及什么是中级调度？</strong></p><ul><li>高级调度称为作业调度，是根据某种算法，把外存上处于后备队列的作业调入内存</li><li>低级调度称为进程调度，根据某种算法就绪队列的进程分配处理机</li><li>中级调度主要目的是提高内存的利用率和系统吞吐量，将暂时不能运行的进程调至外存等待，将进程的状态改为挂机状态</li></ul></li><li><p><strong>常见的调度算法？</strong></p><ul><li>FCFS(从先来先服务) 按照进入系统先后的次序调度，有利于CPU繁忙型进程，不利于IO繁忙型进程，对短作业不利</li><li>SJF(短作业优先) 挑选运行时间最短的进程先上处理机，对长作业不利，容易使其饥饿</li><li>优先级调度算法，又分为抢占式和非抢占式</li><li>高响应比优先调度算法，响应比等于(等待时间+要求服务时间)/要求服务时间克服了饥饿状态</li><li>时间片轮转算法 主要适用于分时系统的调度，若时间片太大，则会退化成先来先服务，若时间片太小，则会频繁切换上下文，频繁中断，增加系统开销</li><li>多级反馈队列调度算法 设置多个就绪队列，并赋予优先级，优先级越高，时间片越小。仅当高优先级队列中无就绪进程才开始调度低优先级队列的进程</li></ul></li><li><p><strong>什么是死锁？为什么会产生死锁？怎么解决死锁？</strong></p><ul><li><p>死锁是指多个进程因竞争资源而造成互相等待，无法向前推进的局面。</p></li><li><p>产生死锁的原因有竞争资源和推进顺序非法</p></li><li><p>死锁产生的必要条件：</p><ul><li>互斥</li><li>请求和保持 进程本身占有资源又去请求其他资源</li><li>不可剥夺</li><li>循环等待 存在一种进程等待循环链</li></ul></li><li><p>解决死锁的方法有：</p><ul><li>预防死锁 破坏死锁产生的必要条件</li><li>避免死锁 银行家算法</li><li>死锁的监测与解除  检测使用资源分配图 解除可以进程回退、撤销进程</li></ul></li><li><p><strong>什么是动态重定位？怎么实现？</strong></p><p>动态重定位是指将访问的程序和数据的逻辑地址转换成物理地址</p><p>具体实现方法是加一个重定位寄存器，装入程序在内存的起始地址，程序执行的时候，访问的是相对地址加上重定位寄存器的地址</p></li><li><p><strong>分区存储管理有哪些分配策略？优缺点</strong></p><ul><li>首次适应算法 按地址从小到大排序 每次分配从低地址查找</li><li>循环首次适应算法 从上次结束的位置查找</li><li>最佳适应算法 按空间大小排序 每次分配最小的符合条件的分区 会留下许多小的难以利用的空闲区</li><li>最坏适应算法 按空间大小排序 每次分配最小、大的符合条件的分区</li></ul></li><li><p><strong>在具有快表的段页式存储管理方式中，如何实现地址变换？</strong></p><p>CPU给出有效地址后，地址变换机构自动把页号送入快表，若匹配，说明访问页面在快表中，从快表中读出物理块号。否则，利用页号查询页表，把页表内的物理块号送入地址寄存器，同时修改快表，若寄存器满，则考虑使用什么算法换出页面</p><ul><li><strong>分段和分页有什么异同？</strong><ul><li>相同点：分页和分段都是离散分配方式，都需要地址变换机构</li><li>不同点：页是物理单位，段是逻辑单位。页面的大小是由系统决定的，且固定不变。段的大小是由用户决定的。分页的地址空间是一维的，分段的地址空间是二维的</li></ul></li></ul><ul><li><p><strong>什么是局部性原理？什么是虚拟存储器？</strong></p><ul><li>局部性原理分两个方面，时间局部性和空间局部性<ul><li>时间局部性是指某条指令执行不久后会再次执行，某个数据使用后会再次使用，原因是程序存在大量的循环操作</li><li>空间局部性是指某个存储单元被访问不久后其附近的存储单元可能被访问，原因是指令通常是顺序存放的，数据一般也以数组聚集存放</li></ul></li><li>虚拟存储器是指具有调入和置换功能，逻辑上对内存进行扩充的一种存储系统。基于局部性原理，在程序装入时，仅仅装入一部分，就可以驱动程序执行，在程序执行过程中，访问的内容不在内存时，操作系统负责将其调入内存。同时操作系统将用不到的内存调出内存。这样在逻辑上扩充的内存的容量</li></ul></li><li><p><strong>有哪些页面置换算法？什么是抖动</strong></p><ul><li>最佳置换算法：将以后最长时间不使用的页面调出，无法实现</li><li>先进先出置换算法：贝乐迪异常</li><li>最近最久未使用算法</li><li>clock置换算法：每个页面设置一个使用位和修改位</li><li>抖动就是页面置换过程中，频繁的换入换出</li></ul></li><li><p><strong>有哪些常用的文件分配方式</strong>?</p><ul><li>连续分配，实现简单，存取速度快。文件长度不宜动态增加</li><li>链接分配，分为显式链接和隐式链接<ul><li>显式链接：把用于链接各个物理块的指针提取出来，显示的放在一张表里，这个表就是FAT文件分配表</li><li>隐式链接：每个磁盘块对应一个磁盘块的链表，每个块都有指向下一个块的指针</li></ul></li><li>索引分配，把文件的所有盘块号组成一张索引表<ul><li>单级索引分配</li><li>多级索引分配</li><li>混合索引分配</li></ul></li></ul></li><li><p><strong>常见的磁盘调度算法</strong></p><ul><li>先来先服务</li><li>短作业优先 会产生饥饿现象</li><li>扫描算法 在磁头当前移动方向上选择与当前磁头距离最近的磁道</li><li>循环扫描算法 到达磁盘端点或最远端点请求快速返回起始端</li></ul></li><li><p><strong>有哪几种IO控制方式</strong></p><ul><li>程序查询方式   CPU对外设不断地轮巡检查 CPU和IO只能串行工作 CPU利用率相当低</li><li>中断方式  允许IO设备主动请求CPU的服务，在CPU完成后可以继续其手头上的工作</li><li>DMA方式 在IO设备和内存之间直接开辟数据交换通路，数据交换的基本单位是数据块，仅在开始和结束是CPU介入，数据传送由DMA控制器控制完成</li><li>通道方式  是DMA的发展，IO通道专门负责输入输出的处理机</li></ul></li><li><p><strong>引入缓冲区的目的是什么</strong></p><ul><li>缓和CPU和IO设备速度不匹配的矛盾</li><li>减少CPU中断频率</li><li>提高CPU与IO设备的并行性</li></ul></li><li><p><strong>什么是SPOOLing技术(假脱机)？</strong> <strong>由哪几部分组成？举出一个应用它的实例？</strong></p><ul><li><p>是慢字符设备和主机交换信息的一种技术，由主机和通道共同参加作业的输入输出工作，是操作系统中一种将独占设备改造成共享设备的技术</p></li><li><p>由三个部分组成：</p><ul><li>输入井输出井</li><li>输入缓冲和输出缓冲</li><li>输入进程和输出进程</li></ul><p>提高了IO速度，将独占设备改造为共享设备，实现了虚拟设备功能</p><ul><li><p>将一台独享的打印机改造为共享的打印机就是应用此技术的典例</p><p>具体做法是：不把真正的打印机分配给用户进程，而是在输出井中开辟一块空闲盘块区，将要打印的数据输入其中，为用户申请打印请求，排成队列，若打印机空闲，从队列头部取出打印请求并打印</p></li></ul></li><li><p><strong>解释下微内核？</strong></p><p>对宏内核架构的操作系统进行<strong>解耦</strong>，将单个功能或模块（如文件系统、设备驱动等）从内核中<strong>拆分</strong>出来，作为一个独立的服务<strong>部署到独立的运行环境</strong>中；内核仅保留极少的功能，<strong>为这些服务提供通信等基础能力，</strong>使其能够互相协作以完成操作系统所必需的功能。这种架构被称为微内核</p></li></ul></li></ul></li></ul></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;重点问题&quot;&gt;&lt;a href=&quot;#重点问题&quot; class=&quot;headerlink&quot; title=&quot;重点问题&quot;&gt;&lt;/a&gt;重点问题&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;什么是操作系统，它有哪些功能和特征&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;操作系统(operat</summary>
+      
+    
+    
+    
+    <category term="考研" scheme="http://example.com/categories/%E8%80%83%E7%A0%94/"/>
+    
+    
+    <category term="考研复习" scheme="http://example.com/tags/%E8%80%83%E7%A0%94%E5%A4%8D%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>C语言复习</title>
     <link href="http://example.com/2022/03/23/C%E8%AF%AD%E8%A8%80%E5%A4%8D%E4%B9%A0/"/>
     <id>http://example.com/2022/03/23/C%E8%AF%AD%E8%A8%80%E5%A4%8D%E4%B9%A0/</id>
@@ -188,30 +214,6 @@
   </entry>
   
   <entry>
-    <title>刷题日记 day-7</title>
-    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%207/"/>
-    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%207/</id>
-    <published>2021-09-23T16:00:00.000Z</published>
-    <updated>2021-09-24T08:29:24.428Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="何为动态规划"><a href="#何为动态规划" class="headerlink" title="何为动态规划"></a>何为动态规划</h2><p>​        动态规划就是Dynamic Programming，简称DP。如果解决一个问题需要解决它的很多重叠子问题，这个时候就需要用到动态规划。</p><p>​        动态规划的解题步骤：</p><ol><li>确定dp数组以及下标的含义</li><li>确定递推公式</li><li>dp数组的初始化</li><li>确定遍历顺序</li><li>举例推导dp数组</li></ol><h2 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h2><p>今天写的第一题是我们的老熟题：<a href="https://leetcode-cn.com/problems/fibonacci-number/">509. 斐波那契数</a> 。这个题目之前用的是递归，今天是动态规划。今天的第二题就有点难理解了：<a href="https://leetcode-cn.com/problems/min-cost-climbing-stairs/">746. 使用最小花费爬楼梯</a>。</p><h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><ol start="509"><li><em><strong>斐波那契数</strong></em></li></ol><pre><code class="java">class Solution &#123;    public int fib(int n) &#123;        if(n&lt;=1)            return n;        int[] dp=new int[n+1];        dp[0]=0;        dp[1]=1;        for(int i=2;i&lt;dp.length;i++)&#123;            dp[i]=dp[i-1]+dp[i-2];//这个就是递推公式        &#125;        return dp[n];    &#125;&#125;</code></pre><ol start="746"><li><em><strong>使用最小花费爬楼梯</strong></em></li></ol><pre><code class="java">class Solution &#123;    public int minCostClimbingStairs(int[] cost) &#123;        int len=cost.length;        int[] dp=new int[len];        dp[0]=cost[0];        dp[1]=cost[1];        for(int i=2;i&lt;len;i++)&#123;            //递推关系式            dp[i]=Math.min(dp[i-1]+cost[i],dp[i-2]+cost[i]);        &#125;        return Math.min(dp[len-1],dp[len-2]);    &#125;&#125;</code></pre><h2 id="分析与小结"><a href="#分析与小结" class="headerlink" title="分析与小结"></a>分析与小结</h2><p>​        从题解代码就可以很清楚的看出，dp数组的下标就表示第几个斐波那契数，而数组相对存储的就是第几个斐波那契数的值，递推公式题目也给了。所以解题十分方便。而第二题是斐波那契数列的变形，非常巧妙。我们每到达一个阶梯，都是从它的上一级或者上两级阶梯，所以当前花费最小将从它的上一级花费和上上一级花费之中诞生。这就是递推关系式： dp[i]=Math.min(dp[i-1]+cost[i],dp[i-2]+cost[i]);的由来。</p><p>​        今天的动态规划就到这里，持之以恒！</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;何为动态规划&quot;&gt;&lt;a href=&quot;#何为动态规划&quot; class=&quot;headerlink&quot; title=&quot;何为动态规划&quot;&gt;&lt;/a&gt;何为动态规划&lt;/h2&gt;&lt;p&gt;​        动态规划就是Dynamic Programming，简称DP。如果解决一个问题需要解决它的</summary>
-      
-    
-    
-    
-    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
-    
-    
-    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
-    
-  </entry>
-  
-  <entry>
     <title>刷题日记 day-8</title>
     <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%208/"/>
     <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%208/</id>
@@ -224,6 +226,30 @@
       
       
     <summary type="html">&lt;h2 id=&quot;初探01背包问题&quot;&gt;&lt;a href=&quot;#初探01背包问题&quot; class=&quot;headerlink&quot; title=&quot;初探01背包问题&quot;&gt;&lt;/a&gt;初探01背包问题&lt;/h2&gt;&lt;p&gt;​        记得我第一次遇到01背包还是上学期，在算法课上听过老师讲动态规划和回溯的时</summary>
+      
+    
+    
+    
+    <category term="LeetCode" scheme="http://example.com/categories/LeetCode/"/>
+    
+    
+    <category term="刷题心得" scheme="http://example.com/tags/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>刷题日记 day-7</title>
+    <link href="http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%207/"/>
+    <id>http://example.com/2021/09/24/%E5%88%B7%E9%A2%98%E6%97%A5%E8%AE%B0%20day%207/</id>
+    <published>2021-09-23T16:00:00.000Z</published>
+    <updated>2021-09-24T08:29:24.428Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="何为动态规划"><a href="#何为动态规划" class="headerlink" title="何为动态规划"></a>何为动态规划</h2><p>​        动态规划就是Dynamic Programming，简称DP。如果解决一个问题需要解决它的很多重叠子问题，这个时候就需要用到动态规划。</p><p>​        动态规划的解题步骤：</p><ol><li>确定dp数组以及下标的含义</li><li>确定递推公式</li><li>dp数组的初始化</li><li>确定遍历顺序</li><li>举例推导dp数组</li></ol><h2 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h2><p>今天写的第一题是我们的老熟题：<a href="https://leetcode-cn.com/problems/fibonacci-number/">509. 斐波那契数</a> 。这个题目之前用的是递归，今天是动态规划。今天的第二题就有点难理解了：<a href="https://leetcode-cn.com/problems/min-cost-climbing-stairs/">746. 使用最小花费爬楼梯</a>。</p><h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h2><ol start="509"><li><em><strong>斐波那契数</strong></em></li></ol><pre><code class="java">class Solution &#123;    public int fib(int n) &#123;        if(n&lt;=1)            return n;        int[] dp=new int[n+1];        dp[0]=0;        dp[1]=1;        for(int i=2;i&lt;dp.length;i++)&#123;            dp[i]=dp[i-1]+dp[i-2];//这个就是递推公式        &#125;        return dp[n];    &#125;&#125;</code></pre><ol start="746"><li><em><strong>使用最小花费爬楼梯</strong></em></li></ol><pre><code class="java">class Solution &#123;    public int minCostClimbingStairs(int[] cost) &#123;        int len=cost.length;        int[] dp=new int[len];        dp[0]=cost[0];        dp[1]=cost[1];        for(int i=2;i&lt;len;i++)&#123;            //递推关系式            dp[i]=Math.min(dp[i-1]+cost[i],dp[i-2]+cost[i]);        &#125;        return Math.min(dp[len-1],dp[len-2]);    &#125;&#125;</code></pre><h2 id="分析与小结"><a href="#分析与小结" class="headerlink" title="分析与小结"></a>分析与小结</h2><p>​        从题解代码就可以很清楚的看出，dp数组的下标就表示第几个斐波那契数，而数组相对存储的就是第几个斐波那契数的值，递推公式题目也给了。所以解题十分方便。而第二题是斐波那契数列的变形，非常巧妙。我们每到达一个阶梯，都是从它的上一级或者上两级阶梯，所以当前花费最小将从它的上一级花费和上上一级花费之中诞生。这就是递推关系式： dp[i]=Math.min(dp[i-1]+cost[i],dp[i-2]+cost[i]);的由来。</p><p>​        今天的动态规划就到这里，持之以恒！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;何为动态规划&quot;&gt;&lt;a href=&quot;#何为动态规划&quot; class=&quot;headerlink&quot; title=&quot;何为动态规划&quot;&gt;&lt;/a&gt;何为动态规划&lt;/h2&gt;&lt;p&gt;​        动态规划就是Dynamic Programming，简称DP。如果解决一个问题需要解决它的</summary>
       
     
     
